@@ -18,3 +18,8 @@ fun SplashActivity.toMainView() {
     startActivity(Intent(this, MainActivity::class.java))
     this.finish()
 }
+
+fun LoginActivity.toMainViewAct() {
+    startActivity(Intent(this, MainActivity::class.java))
+    this.finish()
+}
