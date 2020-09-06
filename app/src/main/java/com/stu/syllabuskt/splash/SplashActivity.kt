@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
                 cursor.close()
                 sqLiteDatabase.close()
             }
-            if (account == null || password == null) toLoginView()
+            if (account.isNullOrEmpty() || password.isNullOrEmpty()) toLoginView()
             else toMainView()
         }
     }
