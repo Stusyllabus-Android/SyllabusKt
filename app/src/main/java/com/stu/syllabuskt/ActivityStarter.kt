@@ -2,6 +2,7 @@ package com.stu.syllabuskt
 
 import android.content.Intent
 import com.stu.syllabuskt.login.LoginActivity
+import com.stu.syllabuskt.main.MainActivity
 import com.stu.syllabuskt.splash.SplashActivity
 
 /**

@@ -8,4 +8,10 @@
     <string name="password_hint">请输入密码</string>
     <string name="login">登录</string>
     <string name="login_info_invalid">账号或密码格式不正确</string>
+    <!--主界面-->
+    <string name="syllabus">课程表</string>
+    <string name="oa">OA</string>
+    <string name="life">Life</string>
+    <string name="personal">个人</string>
+
 </resources>
