@@ -16,7 +16,7 @@ public class DBService {
     public String getUserAccount(Context context) {
         String account = null;
         Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase()
-                .rawQuery("select * from base_user_info", null);
+                .rawQuery("select account from base_user_info", null);
         while(cursor.moveToNext()) {
             account = cursor.getString(cursor.getColumnIndex("account"));
         }
@@ -28,7 +28,7 @@ public class DBService {
     public String getUserPassword(Context context) {
         String password = null;
         Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase()
-                .rawQuery("select * from base_user_info", null);
+                .rawQuery("select password from base_user_info", null);
         while(cursor.moveToNext()) {
             password = cursor.getString(cursor.getColumnIndex("password"));
         }
@@ -37,17 +37,9 @@ public class DBService {
         return password == null ? "" : password;
     }
 
-    public void writeUserAccount(Context context, String account) {
+    public void writeBaseUserInfo(Context context, String account, String password) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("account", account);
-        StuContext.getDataBaseHelper(context)
-                .getWritableDatabase()
-                .insert("base_user_info", null, contentValues);
-        StuContext.getDataBaseHelper(context).getWritableDatabase().close();
-    }
-
-    public void writeUserPassword(Context context, String password) {
-        ContentValues contentValues = new ContentValues();
         contentValues.put("password", password);
         StuContext.getDataBaseHelper(context)
                 .getWritableDatabase()

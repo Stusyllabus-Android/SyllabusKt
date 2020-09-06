@@ -6,11 +6,8 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.api.RetrofitProvider
 import com.stu.syllabuskt.api.YiBanApi
-import com.stu.syllabuskt.bean.YiBanToken
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Response
@@ -58,8 +55,7 @@ class LoginModel(private val mContext: Context) {
                                     response: Response<String>
                                 ) {
 //                                    Log.i(TAG, response.body().toString())
-                                    StuContext.getDBService().writeUserAccount(mContext, account)
-                                    StuContext.getDBService().writeUserPassword(mContext, password)
+                                    StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
                                     loginListener.onSuccess()
 //                                    yiBanApi.token.enqueue(object : retrofit2.Callback<YiBanToken> {
 //                                        override fun onResponse(
