@@ -22,4 +22,11 @@
         <item name="android:windowAnimationStyle">@android:anim/fade_out</item>
     </style>
 
+    <style name="navigation_tab_inactive">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="navigation_tab_active">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
