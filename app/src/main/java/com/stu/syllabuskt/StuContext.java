@@ -2,6 +2,7 @@ package com.stu.syllabuskt;
 
 import android.content.Context;
 
+import com.stu.syllabuskt.db.DBService;
 import com.stu.syllabuskt.db.DataBaseHelper;
 
 /**
@@ -20,5 +21,16 @@ public final class StuContext {
 
     public static DataBaseHelper getDataBaseHelper(Context mContext) {
         return mDataBaseHelper.get(mContext);
+    }
+
+    private final static SingleTon<DBService, Void> mDBService = new SingleTon<DBService, Void>() {
+        @Override
+        protected DBService create(Void aVoid) {
+            return new DBService();
+        }
+    };
+
+    public static DBService getDBService() {
+        return mDBService.get(null);
     }
 }
