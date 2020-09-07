@@ -6,6 +6,7 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.api.RetrofitProvider
 import com.stu.syllabuskt.api.YiBanApi
+import com.stu.syllabuskt.bean.YiBanToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
@@ -55,29 +56,27 @@ class LoginModel(private val mContext: Context) {
                                     response: Response<String>
                                 ) {
 //                                    Log.i(TAG, response.body().toString())
-                                    StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
-                                    loginListener.onSuccess()
-//                                    yiBanApi.token.enqueue(object : retrofit2.Callback<YiBanToken> {
-//                                        override fun onResponse(
-//                                            call: Call<YiBanToken>,
-//                                            response: Response<YiBanToken>
-//                                        ) {
-//                                            StuContext.getDBService().writeUserAccount(mContext, account)
-//                                            StuContext.getDBService().writeUserPassword(mContext, password)
-//                                            Log.i(TAG, "" + response.body()?.vid ?: "")
-//                                            Log.i(TAG, "" + response.body()?.timestamp ?: "")
-//                                            Log.i(TAG, response.body()?.app ?: "")
-//                                            Log.i(TAG, response.body()?.nonce ?: "")
-//                                            Log.i(TAG, response.body()?.token ?: "")
-//                                        }
-//
-//                                        override fun onFailure(
-//                                            call: Call<YiBanToken>,
-//                                            t: Throwable
-//                                        ) {
-//                                            Log.e(TAG, t.message ?: "")
-//                                        }
-//                                    })
+                                    yiBanApi.token.enqueue(object : retrofit2.Callback<YiBanToken> {
+                                        override fun onResponse(
+                                            call: Call<YiBanToken>,
+                                            response: Response<YiBanToken>
+                                        ) {
+                                            Log.i(TAG, "" + response.body()?.vid ?: "")
+                                            Log.i(TAG, "" + response.body()?.timestamp ?: "")
+                                            Log.i(TAG, response.body()?.app ?: "")
+                                            Log.i(TAG, response.body()?.nonce ?: "")
+                                            Log.i(TAG, response.body()?.token ?: "")
+                                            StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
+                                            loginListener.onSuccess()
+                                        }
+
+                                        override fun onFailure(
+                                            call: Call<YiBanToken>,
+                                            t: Throwable
+                                        ) {
+                                            Log.e(TAG, t.message ?: "")
+                                        }
+                                    })
                                 }
 
                                 override fun onFailure(call: Call<String>, t: Throwable) {

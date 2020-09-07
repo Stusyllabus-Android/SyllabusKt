@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".personal.setting.SettingActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@android:color/white">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/setting"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/helpAndFeedback"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/help_feedback"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap" />
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/help_feedback" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/share2"
+        app:layout_constraintTop_toBottomOf="@id/helpAndFeedback"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:text="@string/share_app"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap" />
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/share_app" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/aboutUs"
+        app:layout_constraintTop_toBottomOf="@id/share2"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:text="@string/about_us"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="RelativeOverlap" />
+        <TextView
+            android:id="@+id/versionNameTextView"
+            android:text="@string/current_version"
+            android:layout_toLeftOf="@+id/inIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/inIcon" />
+        <ImageView
+            android:id="@+id/inIcon"
+            android:src="@drawable/icon_in"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/about_us" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/logout"
+        app:layout_constraintTop_toBottomOf="@id/aboutUs"
+        android:padding="10dp"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/logout"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:textColor="#FF6636"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
