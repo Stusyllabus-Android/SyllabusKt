@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,11 +22,24 @@
         <item name="android:windowAnimationStyle">@android:anim/fade_out</item>
     </style>
 
+    <!-- 去除底部tab切换的动画 -->
     <style name="navigation_tab_inactive">
         <item name="android:textSize">12sp</item>
     </style>
     <style name="navigation_tab_active">
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="radius" format="dimension"/>
+    </declare-styleable>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/material_white</item>
+        <item name="android:textColorPrimary">@color/menuText</item>
+        <item name="android:colorBackground">@color/menuBackground</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

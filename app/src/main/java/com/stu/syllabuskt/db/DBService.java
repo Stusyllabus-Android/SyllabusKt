@@ -46,4 +46,11 @@ public class DBService {
                 .insert("base_user_info", null, contentValues);
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
+
+    public void clearAllData(Context context) {
+        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("base_user_info", null, new String[]{});
+        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("user_info", null, new String[]{});
+        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("yiban_table", null, new String[]{});
+        StuContext.getDataBaseHelper(context).close();
+    }
 }
