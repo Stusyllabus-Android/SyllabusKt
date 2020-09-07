@@ -13,5 +13,20 @@
     <string name="oa">OA</string>
     <string name="life">Life</string>
     <string name="personal">个人</string>
-
+    <!-- 个人模块-->
+    <string name="empty_sign">个性签名为空</string>
+    <string name="change_semester">切换学期</string>
+    <string name="current_semester">未设置当前学期</string>
+    <string name="change_theme">切换主题</string>
+    <string name="personal_page">个人主页</string>
+    <string name="school_smart_card">一卡通</string>
+    <string name="examination">考试</string>
+    <string name="grade">成绩</string>
+    <string name="setting">设置</string>
+    <!-- 设置-->
+    <string name="help_feedback">帮助与反馈</string>
+    <string name="share_app">分享应用</string>
+    <string name="current_version">当前版本</string>
+    <string name="about_us">关于我们</string>
+    <string name="logout">退出登录</string>
 </resources>

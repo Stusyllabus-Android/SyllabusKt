@@ -1,14 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".personal.PersonalFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/fragment_toolbar_layout"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/personal" />
+        android:layout_height="120dp">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/headIV"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="1dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/personal_page" />
+
+        <LinearLayout
+            android:id="@+id/nicknameAndId"
+            android:layout_toRightOf="@id/headIV"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/headIV">
+
+            <TextView
+                android:id="@+id/nicknameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#1F2229"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/idTextView"
+                android:textColor="#989DA7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/signatureTextView"
+                android:text="@string/empty_sign"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RelativeOverlap">
+            <LinearLayout
+                android:id="@+id/toPersonalActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables,UselessParent">
+                <TextView
+                    android:text="@string/personal_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/iconIn"
+                    android:src="@drawable/icon_in"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/personal_page" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:id="@+id/changeSemesterLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/semesterIcon"
+            android:src="@drawable/icon_semester"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/change_semester" />
+        <TextView
+            android:text="@string/change_semester"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/semesterIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/semesterIcon" />
+        <TextView
+            android:id="@+id/semesterTextView"
+            android:text="@string/current_semester"
+            android:textSize="16sp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/changeThemeLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/themeIcon"
+            android:src="@drawable/icon_theme"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/change_theme" />
+        <TextView
+            android:text="@string/change_theme"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/themeIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/themeIcon"
+            android:layout_marginStart="10dp" />
+    </RelativeLayout>
+
+    <View
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:id="@+id/smartCardLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/smartCardIcon"
+            android:src="@drawable/icon_smartcard"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/school_smart_card" />
+        <TextView
+            android:text="@string/school_smart_card"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/smartCardIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/smartCardIcon"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/school_smart_card" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/examinationLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/arrangeIcon"
+            android:src="@drawable/icon_examination"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/examination" />
+        <TextView
+            android:text="@string/examination"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/arrangeIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/arrangeIcon"
+            android:layout_marginStart="10dp"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/examination" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gradeLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/scoreIcon"
+            android:src="@drawable/icon_score"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/grade" />
+        <TextView
+            android:text="@string/grade"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/scoreIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/scoreIcon"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/grade" />
+    </RelativeLayout>
+
+    <View
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
+    <RelativeLayout
+        android:id="@+id/settingLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/settingIcon"
+            android:src="@drawable/icon_setting"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@+id/settingIcon"
+            android:text="@string/setting"
+            android:textColor="#060911"
+            android:textSize="18sp"
+            android:layout_marginStart="9dp"
+            android:layout_toEndOf="@+id/settingIcon"
+            tools:ignore="RelativeOverlap" />
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/setting" />
+    </RelativeLayout>
+
+</LinearLayout>
