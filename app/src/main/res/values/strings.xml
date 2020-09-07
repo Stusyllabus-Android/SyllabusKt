@@ -16,6 +16,7 @@
     <!-- 个人模块-->
     <string name="empty_sign">个性签名为空</string>
     <string name="change_semester">切换学期</string>
+    <string name="current_semester">未设置当前学期</string>
     <string name="change_theme">切换主题</string>
     <string name="personal_page">个人主页</string>
     <string name="school_smart_card">一卡通</string>

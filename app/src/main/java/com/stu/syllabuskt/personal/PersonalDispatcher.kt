@@ -2,7 +2,10 @@ package com.stu.syllabuskt.personal
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.stu.syllabuskt.R
 import kotlinx.android.synthetic.main.fragment_personal.view.*
 
@@ -36,7 +39,12 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             examinationLayout = it.findViewById(R.id.examinationLayout)
             gradeLayout = it.findViewById(R.id.gradeLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
-
+        }
+        view.findViewById<ImageView>(R.id.headIV).let {
+            Glide.with(fragment.context!!)
+                .load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3343831728,3984740061&fm=26&gp=0.jpg")
+                .apply(RequestOptions.circleCropTransform())
+                .into(it)
         }
     }
 

@@ -9,11 +9,78 @@
     <include layout="@layout/fragment_toolbar_layout"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.stu.syllabuskt.widget.RoundImageView
-        android:id="@+id/headImageView"
-        android:src="@mipmap/ic_launcher"
-        android:layout_width="80dp"
-        android:layout_height="80dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <ImageView
+            android:id="@+id/headIV"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="1dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/personal_page" />
+
+        <LinearLayout
+            android:id="@+id/nicknameAndId"
+            android:layout_toRightOf="@id/headIV"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/headIV">
+
+            <TextView
+                android:id="@+id/nicknameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#1F2229"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/idTextView"
+                android:textColor="#989DA7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/signatureTextView"
+                android:text="@string/empty_sign"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RelativeOverlap">
+            <LinearLayout
+                android:id="@+id/toPersonalActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UseCompoundDrawables,UselessParent">
+                <TextView
+                    android:text="@string/personal_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/iconIn"
+                    android:src="@drawable/icon_in"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/personal_page" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <View
         android:background="#EBEDF0"
@@ -51,6 +118,7 @@
             android:layout_toEndOf="@+id/semesterIcon" />
         <TextView
             android:id="@+id/semesterTextView"
+            android:text="@string/current_semester"
             android:textSize="16sp"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
