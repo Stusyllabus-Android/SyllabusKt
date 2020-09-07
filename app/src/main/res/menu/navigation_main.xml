@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/syllabus"
+        android:title="@string/syllabus"
+        android:icon="@drawable/icon_syllabus"/>
+    <item
+        android:id="@+id/oa"
+        android:title="@string/oa"
+        android:icon="@drawable/icon_oa"/>
+    <item
+        android:id="@+id/life"
+        android:title="@string/life"
+        android:icon="@drawable/icon_life"/>
+    <item
+        android:id="@+id/person"
+        android:title="@string/personal"
+        android:icon="@drawable/icon_person"/>
+</menu>
