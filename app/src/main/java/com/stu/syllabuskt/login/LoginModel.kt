@@ -48,7 +48,7 @@ class LoginModel(private val mContext: Context) {
                             .getElementsByAttributeValue("name", "__RequestVerificationToken")
                             .first()
                             .attr("value")
-                        Log.i(TAG, token)
+                        Log.i(TAG, "login() >>> token is : $token")
                         yiBanApi.login("$account@stu.edu.cn", password, token)
                             .enqueue(object : retrofit2.Callback<String> {
                                 override fun onResponse(

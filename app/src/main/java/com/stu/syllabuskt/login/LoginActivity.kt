@@ -28,11 +28,16 @@ class LoginActivity : BaseActivity(), LoginContract.view {
     }
 
     override fun toMainView() {
-        toMainViewAct()
+        runOnUiThread {
+            loadingDialog.realDismiss()
+            toMainViewAct()
+        }
     }
 
     override fun showLoading() {
-        loadingDialog.show()
+        runOnUiThread {
+            loadingDialog.show()
+        }
     }
 
     override fun showFailMsg(msg: String) {
