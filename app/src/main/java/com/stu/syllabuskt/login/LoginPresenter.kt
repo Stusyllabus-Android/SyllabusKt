@@ -11,19 +11,20 @@ class LoginPresenter(val view: LoginContract.view, mContext: Context): LoginCont
     var model: LoginModel = LoginModel(mContext)
 
     override fun login(account: String, password: String) {
-        model.login(account, password, object : LoginModel.LoginListener {
-            override fun onProgress() {
-                view.showLoading()
-            }
-
-            override fun onSuccess() {
-                view.toMainView()
-            }
-
-            override fun onFailure(msg: String) {
-                view.showFailMsg(msg)
-            }
-        })
+        view.showLoading()
+//        model.login(account, password, object : LoginModel.LoginListener {
+//            override fun onProgress() {
+//                view.showLoading()
+//            }
+//
+//            override fun onSuccess() {
+//                view.toMainView()
+//            }
+//
+//            override fun onFailure(msg: String) {
+//                view.showFailMsg(msg)
+//            }
+//        })
     }
 
 }
