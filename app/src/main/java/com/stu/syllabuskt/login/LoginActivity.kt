@@ -2,17 +2,16 @@ package com.stu.syllabuskt.login
 
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import com.stu.syllabuskt.R
-import com.stu.syllabuskt.anim.LoadingAnimationUtil
 import com.stu.syllabuskt.base.BaseActivity
 import com.stu.syllabuskt.toMainViewAct
 import com.stu.syllabuskt.utils.ToastUtil
+import com.stu.syllabuskt.widget.LoadingDialog
 
 class LoginActivity : BaseActivity(), LoginContract.view {
 
     lateinit var presenter: LoginPresenter
-    lateinit var loadingView: LinearLayout
+    lateinit var loadingDialog: LoadingDialog
 
     override fun getContentView(): Int {
         return R.layout.activity_login
@@ -20,7 +19,7 @@ class LoginActivity : BaseActivity(), LoginContract.view {
 
     override fun init() {
         presenter = LoginPresenter(this, this)
-        loadingView = findViewById(R.id.loadingView)
+        loadingDialog = LoadingDialog(this, "正在登录中…")
         val accountET = findViewById<EditText>(R.id.accountEditText)
         val passwordET = findViewById<EditText>(R.id.passwordEditText)
         findViewById<Button>(R.id.loginButton).setOnClickListener {
@@ -33,7 +32,7 @@ class LoginActivity : BaseActivity(), LoginContract.view {
     }
 
     override fun showLoading() {
-        LoadingAnimationUtil.startLoading(this, loadingView)
+        loadingDialog.show()
     }
 
     override fun showFailMsg(msg: String) {

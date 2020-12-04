@@ -87,8 +87,4 @@
         android:baselineAligned="false"
         android:text="@string/login" />
 
-    <include
-        android:id="@+id/loadingView"
-        layout="@layout/common_loading"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
