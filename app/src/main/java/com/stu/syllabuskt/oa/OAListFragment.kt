@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stu.syllabuskt.R
@@ -42,7 +43,7 @@ class OAListFragment : BaseFragment(), OAListContract.view {
     }
 
     override fun showLoading() {
-        runOnUiThread { loadingDialog.show() }
+//        runOnUiThread { loadingDialog.show() }
     }
 
     override fun showErrMsg(msg: String) {
@@ -51,7 +52,7 @@ class OAListFragment : BaseFragment(), OAListContract.view {
 
     override fun setPagerAdapter(oaList: List<OABean>?) {
         runOnUiThread {
-            loadingDialog.realDismiss()
+//            loadingDialog.realDismiss()
             oaListContainer.adapter = OAListAdapter(context!!, oaList)
             oaListContainer.run { adapter?.notifyDataSetChanged() }
         }

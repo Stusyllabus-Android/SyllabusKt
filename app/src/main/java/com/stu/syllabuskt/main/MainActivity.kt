@@ -30,8 +30,7 @@ class MainActivity : BaseActivity(), IMainView {
         when(id){
             R.id.syllabus -> fragmentList[0]
             R.id.oa -> fragmentList[1]
-            R.id.life -> fragmentList[2]
-            R.id.person -> fragmentList[3]
+            R.id.person -> fragmentList[2]
             else -> fragmentList[0]
         }.let {
             supportFragmentManager.beginTransaction().replace(R.id.mainContainer, it).commit()

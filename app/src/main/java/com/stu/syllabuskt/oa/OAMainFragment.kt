@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
@@ -12,18 +13,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment
-import com.stu.syllabuskt.bean.OABean
-import com.stu.syllabuskt.utils.ToastUtil
 import com.stu.syllabuskt.widget.LoadingDialog
 
 class OAMainFragment : BaseFragment() {
 
-    private val TAG = "OAFragment"
+    private val TAG = "OAMainFragment"
+
+    private var currentPageIndex: Int = 1
 
     lateinit var loadingDialog: LoadingDialog
     lateinit var oaRefreshLayout: SwipeRefreshLayout
     lateinit var oaListViewPager: ViewPager
     lateinit var oaSearchFAB: FloatingActionButton
+
+    lateinit var titleTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,7 @@ class OAMainFragment : BaseFragment() {
     ): View? {
         loadingDialog = LoadingDialog(context!!, null)
         return inflater.inflate(R.layout.fragment_oa, container, false).apply {
+            titleTextView = findViewById<TextView>(R.id.titleBarTV).apply { text = "第 $currentPageIndex 页" }
             oaRefreshLayout = findViewById(R.id.oaRefreshLayout)
             oaListViewPager = findViewById(R.id.oaListVP)
             oaSearchFAB = findViewById(R.id.oaSearchFAB)
@@ -45,7 +49,7 @@ class OAMainFragment : BaseFragment() {
 
     private fun onInitEvent() {
         oaRefreshLayout.setOnRefreshListener {
-            OAListFragment.newInstance(1)
+            OAListFragment.newInstance(currentPageIndex)
         }
         oaListViewPager.apply {
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -63,7 +67,8 @@ class OAMainFragment : BaseFragment() {
 
                 override fun onPageSelected(position: Int) {
                     Log.i(TAG, "onPageSelected() >>> position is $position")
-                    oaRefreshLayout.isEnabled = position == 1
+                    currentPageIndex = position + 1
+                    titleTextView.text = "第 $currentPageIndex 页"
                 }
             })
         }

@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleBarTV"
         android:text="标题"
         android:textSize="22sp"
         android:textColor="#ffffff"

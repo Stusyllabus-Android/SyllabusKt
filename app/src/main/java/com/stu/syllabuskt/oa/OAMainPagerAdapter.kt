@@ -14,6 +14,6 @@ class OAMainPagerAdapter(private val fm: FragmentManager, private val behavior: 
     }
 
     override fun getItem(position: Int): Fragment {
-        return OAListFragment.newInstance(position)
+        return OAListFragment.newInstance(position + 1)
     }
 }
