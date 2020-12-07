@@ -2,7 +2,7 @@ package com.stu.syllabuskt.main
 
 import androidx.fragment.app.Fragment
 import com.stu.syllabuskt.R
-import com.stu.syllabuskt.oa.OAFragment
+import com.stu.syllabuskt.oa.OAMainFragment
 import com.stu.syllabuskt.personal.PersonalFragment
 import com.stu.syllabuskt.syllabus.SyllabusFragment
 
@@ -14,7 +14,7 @@ class MainPresenter(val mainActivity: MainActivity) {
     init {
         arrayListOf<Fragment>().apply {
             this.add(SyllabusFragment.newInstance())
-            this.add(OAFragment.newInstance())
+            this.add(OAMainFragment.newInstance())
             this.add(PersonalFragment.newInstance())
         }.let {
             mainActivity.apply {

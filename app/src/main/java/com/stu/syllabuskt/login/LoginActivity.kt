@@ -42,5 +42,8 @@ class LoginActivity : BaseActivity(), LoginContract.view {
 
     override fun showFailMsg(msg: String) {
         ToastUtil.showShort(this, msg)
+        runOnUiThread {
+            loadingDialog.realDismiss()
+        }
     }
 }

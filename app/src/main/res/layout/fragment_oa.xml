@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".oa.OAFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/title_bar"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/oaRefreshLayout"
+        android:layout_below="@+id/titleBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/oa" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/oaListVP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/oaSearchFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:contentDescription="OASearchFloatActionButton"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

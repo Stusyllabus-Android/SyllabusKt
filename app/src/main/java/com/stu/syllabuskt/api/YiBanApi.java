@@ -1,7 +1,10 @@
 package com.stu.syllabuskt.api;
 
+import com.stu.syllabuskt.bean.OABean;
 import com.stu.syllabuskt.bean.YiBanTimeTable;
 import com.stu.syllabuskt.bean.YiBanToken;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,4 +35,10 @@ public interface YiBanApi {
                                       @Query("app") String app,
                                       @Query("nonce") String nonce,
                                       @Query("token") String token);
+
+    @GET("api/api/oalist")
+    Call<List<OABean>> getOAList(@Query("pageindex") long pageindex, @Query("pagesize") long pagesize, @Query("department") long department);
+
+    @GET("api/api/oadetail")
+    Call<String> getOADetail(@Query("id") long id);
 }

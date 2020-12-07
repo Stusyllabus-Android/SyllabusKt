@@ -36,6 +36,7 @@ class LoginModel(private val mContext: Context) {
                 .enqueue(object : retrofit2.Callback<String> {
 
                     override fun onFailure(call: retrofit2.Call<String>, t: Throwable) {
+                        loginListener.onFailure("网络出错，请稍后重试")
                         Log.e(TAG, t.message ?: "")
                     }
 
@@ -44,6 +45,7 @@ class LoginModel(private val mContext: Context) {
                         response: retrofit2.Response<String>
                     ) {
 //                        Log.i(TAG, response.body().toString())
+                        // TODO: 2020/12/4 Android 6.0.1会crash
                         val token = Jsoup.parse(response.body().toString())
                             .getElementsByAttributeValue("name", "__RequestVerificationToken")
                             .first()
@@ -61,8 +63,8 @@ class LoginModel(private val mContext: Context) {
                                             call: Call<YiBanToken>,
                                             response: Response<YiBanToken>
                                         ) {
-                                            Log.i(TAG, "" + response.body()?.vid ?: "")
-                                            Log.i(TAG, "" + response.body()?.timestamp ?: "")
+                                            Log.i(TAG, "" + response.body()?.vid)
+                                            Log.i(TAG, "" + response.body()?.timestamp)
                                             Log.i(TAG, response.body()?.app ?: "")
                                             Log.i(TAG, response.body()?.nonce ?: "")
                                             Log.i(TAG, response.body()?.token ?: "")
@@ -75,12 +77,14 @@ class LoginModel(private val mContext: Context) {
                                             t: Throwable
                                         ) {
                                             Log.e(TAG, t.message ?: "")
+                                            loginListener.onFailure("网络出错，请稍后重试")
                                         }
                                     })
                                 }
 
                                 override fun onFailure(call: Call<String>, t: Throwable) {
                                     Log.e(TAG, t.message ?: "")
+                                    loginListener.onFailure("网络出错，请稍后重试")
                                 }
                             })
                     }
