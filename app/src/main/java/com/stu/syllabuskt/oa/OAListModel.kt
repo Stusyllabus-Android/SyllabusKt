@@ -10,13 +10,13 @@ import retrofit2.Response
 /**
  * Create by yuan on 2020/12/5
  */
-class OAModel(private val mContext: Context) {
+class OAListModel(private val mContext: Context) {
 
     private val yiBanApi: YiBanApi = RetrofitProvider.getYiBanRetrofit(mContext).create(YiBanApi::class.java)
 
-    fun getOAList(oaModelListener: OAModelListener) {
+    fun getOAList(pageIndex: Int, oaModelListener: OAModelListener) {
         oaModelListener.onProgress()
-        yiBanApi.getOAList(1, 10, -1)
+        yiBanApi.getOAList(pageIndex.toLong(), 10, -1)
             .enqueue(object : retrofit2.Callback<List<OABean>> {
                 override fun onFailure(call: Call<List<OABean>>, t: Throwable) {
                     oaModelListener.onFailure(t.message ?: "")

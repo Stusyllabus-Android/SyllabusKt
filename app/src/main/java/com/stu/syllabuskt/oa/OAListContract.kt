@@ -5,7 +5,7 @@ import com.stu.syllabuskt.bean.OABean
 /**
  * Create by yuan on 2020/12/5
  */
-interface OAContract {
+interface OAListContract {
 
     interface view {
         fun showLoading()

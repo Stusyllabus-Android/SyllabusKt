@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,16 +16,14 @@ import com.stu.syllabuskt.bean.OABean
 import com.stu.syllabuskt.utils.ToastUtil
 import com.stu.syllabuskt.widget.LoadingDialog
 
-class OAFragment : BaseFragment(), OAContract.view {
+class OAMainFragment : BaseFragment() {
 
     private val TAG = "OAFragment"
 
     lateinit var loadingDialog: LoadingDialog
     lateinit var oaRefreshLayout: SwipeRefreshLayout
-    lateinit var oaListContainer: ViewPager
+    lateinit var oaListViewPager: ViewPager
     lateinit var oaSearchFAB: FloatingActionButton
-
-    private val oaPresenter = OAPresenter(this, context!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +32,22 @@ class OAFragment : BaseFragment(), OAContract.view {
         loadingDialog = LoadingDialog(context!!, null)
         return inflater.inflate(R.layout.fragment_oa, container, false).apply {
             oaRefreshLayout = findViewById(R.id.oaRefreshLayout)
-            oaListContainer = findViewById(R.id.oaListContainer)
+            oaListViewPager = findViewById(R.id.oaListVP)
             oaSearchFAB = findViewById(R.id.oaSearchFAB)
+            onInitView()
             onInitEvent()
-            oaPresenter.loadOAList(1)
         }
     }
 
+    private fun onInitView() {
+        oaListViewPager.adapter = OAMainPagerAdapter(fragmentManager!!, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+    }
+
     private fun onInitEvent() {
-        oaRefreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                oaPresenter.loadOAList(1)
-            }
-        })
-        oaListContainer.apply {
+        oaRefreshLayout.setOnRefreshListener {
+            OAListFragment.newInstance(1)
+        }
+        oaListViewPager.apply {
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
                     Log.i(TAG, "onPageScrollStateChanged() >>> state is $state")
@@ -62,30 +63,15 @@ class OAFragment : BaseFragment(), OAContract.view {
 
                 override fun onPageSelected(position: Int) {
                     Log.i(TAG, "onPageSelected() >>> position is $position")
-                    oaPresenter.loadOAList(position)
+                    oaRefreshLayout.isEnabled = position == 1
                 }
             })
         }
         oaSearchFAB.setOnClickListener{}
     }
 
-    override fun showLoading() {
-        runOnUiThread { loadingDialog.show() }
-    }
-
-    override fun showErrMsg(msg: String) {
-        ToastUtil.showShort(context!!, msg)
-    }
-
-    override fun setPagerAdapter(oaList: List<OABean>?) {
-        runOnUiThread {
-            loadingDialog.realDismiss()
-            oaListContainer.adapter = OAPagerAdapter(context!!, oaList)
-        }
-    }
-
     companion object {
         @JvmStatic
-        fun newInstance() = OAFragment()
+        fun newInstance() = OAMainFragment()
     }
 }

@@ -6,12 +6,13 @@ import com.stu.syllabuskt.bean.OABean
 /**
  * Create by yuan on 2020/12/5
  */
-class OAPresenter(val mView: OAContract.view, mContext: Context) : OAContract.presenter {
+class OAListPresenter(val mView: OAListContract.view, mContext: Context) : OAListContract.presenter {
 
-    private val oaModel = OAModel(mContext)
+    private val oaModel = OAListModel(mContext)
 
     override fun loadOAList(pageIndex: Int) {
-        oaModel.getOAList(object : OAModel.OAModelListener {
+        mView.showLoading()
+        oaModel.getOAList(pageIndex, object : OAListModel.OAModelListener {
             override fun onProgress() {
 
             }
