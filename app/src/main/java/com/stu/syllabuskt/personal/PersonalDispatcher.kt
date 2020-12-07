@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.stu.syllabuskt.R
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_personal.view.*
  **/
 class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnClickListener {
 
+    lateinit var titleTV: TextView
     lateinit var changeSemesterLayout: RelativeLayout
     lateinit var changeThemeLayout: RelativeLayout
     lateinit var schoolSmartCardLayout: RelativeLayout
@@ -33,6 +35,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
 
     private fun initView(view: View) {
         view.let {
+            it.findViewById<TextView>(R.id.titleBarTV).apply { text = fragment.getText(R.string.personal)}
             changeSemesterLayout = it.findViewById(R.id.changeSemesterLayout)
             changeThemeLayout = it.findViewById(R.id.changeThemeLayout)
             schoolSmartCardLayout = it.findViewById(R.id.smartCardLayout)
@@ -40,12 +43,12 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             gradeLayout = it.findViewById(R.id.gradeLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
         }
-        view.findViewById<ImageView>(R.id.headIV).let {
-            Glide.with(fragment.context!!)
-                .load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3343831728,3984740061&fm=26&gp=0.jpg")
-                .apply(RequestOptions.circleCropTransform())
-                .into(it)
-        }
+//        view.findViewById<ImageView>(R.id.headIV).let {
+//            Glide.with(fragment.context!!)
+//                .load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3343831728,3984740061&fm=26&gp=0.jpg")
+//                .apply(RequestOptions.circleCropTransform())
+//                .into(it)
+//        }
     }
 
     private fun initEvent() {
