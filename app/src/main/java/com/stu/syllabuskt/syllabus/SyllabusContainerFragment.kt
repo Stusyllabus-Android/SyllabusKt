@@ -36,7 +36,7 @@ class SyllabusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_syllabus, container, false)
+        return inflater.inflate(R.layout.fragment_syllabus_container, container, false)
     }
 
     companion object {
