@@ -23,7 +23,9 @@ import kotlin.collections.ArrayList
 class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnClickListener {
 
     private val TAG = "PersonalDispatcher"
-
+  
+    lateinit var titleTV: TextView
+  
     lateinit var changeSemesterLayout: RelativeLayout
     lateinit var changeThemeLayout: RelativeLayout
     lateinit var schoolSmartCardLayout: RelativeLayout
@@ -47,6 +49,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
 
     private fun initView(view: View) {
         view.let {
+            it.findViewById<TextView>(R.id.titleBarTV).apply { text = fragment.getText(R.string.personal)}
             changeSemesterLayout = it.findViewById(R.id.changeSemesterLayout)
             mSemesterTextView = it.findViewById(R.id.semesterTextView)
             changeThemeLayout = it.findViewById(R.id.changeThemeLayout)
@@ -55,12 +58,12 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             gradeLayout = it.findViewById(R.id.gradeLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
         }
-        view.findViewById<ImageView>(R.id.headIV).let {
-            Glide.with(fragment.context!!)
-                .load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3343831728,3984740061&fm=26&gp=0.jpg")
-                .apply(RequestOptions.circleCropTransform())
-                .into(it)
-        }
+//        view.findViewById<ImageView>(R.id.headIV).let {
+//            Glide.with(fragment.context!!)
+//                .load("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3343831728,3984740061&fm=26&gp=0.jpg")
+//                .apply(RequestOptions.circleCropTransform())
+//                .into(it)
+//        }
     }
 
     private fun initEvent() {
