@@ -16,9 +16,9 @@ public class YiBanToken {
      */
 
     @SerializedName("vid")
-    public int vid;
+    public long vid;
     @SerializedName("timestamp")
-    public int timestamp;
+    public long timestamp;
     @SerializedName("token")
     public String token;
     @SerializedName("app")

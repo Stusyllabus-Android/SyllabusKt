@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.stu.syllabuskt.StuContext;
+import com.stu.syllabuskt.bean.YiBanTimeTable;
 
 /**
  * yuan
@@ -44,6 +45,20 @@ public class DBService {
         StuContext.getDataBaseHelper(context)
                 .getWritableDatabase()
                 .insert("base_user_info", null, contentValues);
+        StuContext.getDataBaseHelper(context).getWritableDatabase().close();
+    }
+
+    public void writeTimeTable(Context context, YiBanTimeTable.TableBean tableBean) {
+        ContentValues values = new ContentValues();
+        values.put("xnxqName", tableBean.xnxqName);
+        values.put("kkbKey", tableBean.kkbKey);
+        values.put("kcName", tableBean.kcName);
+        values.put("jsName", tableBean.jsName);
+        values.put("ksName", tableBean.ksName);
+        values.put("sjName", tableBean.sjName);
+        StuContext.getDataBaseHelper(context)
+                .getWritableDatabase()
+                .insert("yiban_table", null, values);
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
 
