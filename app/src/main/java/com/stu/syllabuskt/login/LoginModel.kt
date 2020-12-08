@@ -6,6 +6,7 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.api.RetrofitProvider
 import com.stu.syllabuskt.api.YiBanApi
+import com.stu.syllabuskt.bean.YiBanTimeTable
 import com.stu.syllabuskt.bean.YiBanToken
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -69,7 +70,25 @@ class LoginModel(private val mContext: Context) {
                                             Log.i(TAG, response.body()?.nonce ?: "")
                                             Log.i(TAG, response.body()?.token ?: "")
                                             StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
-                                            loginListener.onSuccess()
+
+                                            yiBanApi.getTimeTable(response.body()?.vid ?: 0, response.body()?.timestamp ?: 0, response.body()?.app, response.body()?.nonce, response.body()?.token).enqueue(object : retrofit2.Callback<YiBanTimeTable> {
+                                                override fun onResponse(
+                                                    call: Call<YiBanTimeTable>,
+                                                    response: Response<YiBanTimeTable>
+                                                ) {
+                                                    response.body()?.table?.forEach { it ->
+                                                        StuContext.getDBService().writeTimeTable(mContext, it)
+                                                    }
+                                                    loginListener.onSuccess()
+                                                }
+
+                                                override fun onFailure(
+                                                    call: Call<YiBanTimeTable>,
+                                                    t: Throwable
+                                                ) {
+
+                                                }
+                                            })
                                         }
 
                                         override fun onFailure(
