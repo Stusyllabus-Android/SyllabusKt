@@ -79,6 +79,7 @@ class LoginModel(private val mContext: Context) {
                                                     response.body()?.table?.forEach { it ->
                                                         StuContext.getDBService().writeTimeTable(mContext, it)
                                                     }
+                                                    StuContext.getDBService().writeSemester(mContext, "Non-existent")
                                                     loginListener.onSuccess()
                                                 }
 

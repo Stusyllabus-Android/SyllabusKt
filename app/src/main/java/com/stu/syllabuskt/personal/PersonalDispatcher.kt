@@ -12,6 +12,7 @@ import com.bigkoo.pickerview.view.OptionsPickerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.stu.syllabuskt.R
+import com.stu.syllabuskt.StuContext
 import kotlinx.android.synthetic.main.fragment_personal.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,7 +33,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     lateinit var examinationLayout: RelativeLayout
     lateinit var gradeLayout: RelativeLayout
     lateinit var settingLayout: RelativeLayout
-
+    lateinit var currentAccountTV: TextView
     //设置学期
     private lateinit var mSemesterTextView: TextView
     private lateinit var years: ArrayList<String>
@@ -50,8 +51,11 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     private fun initView(view: View) {
         view.let {
             it.findViewById<TextView>(R.id.titleBarTV).apply { text = fragment.getText(R.string.personal)}
+            currentAccountTV = (it.findViewById(R.id.currentAccountTV) as TextView).apply { text = StuContext.getDBService().getUserAccount(fragment.context) }
             changeSemesterLayout = it.findViewById(R.id.changeSemesterLayout)
-            mSemesterTextView = it.findViewById(R.id.semesterTextView)
+            mSemesterTextView = (it.findViewById(R.id.semesterTextView) as  TextView).apply {
+                text = if (StuContext.getDBService().getSemester(fragment.context) == "Non-existent") "未设置当前学期" else StuContext.getDBService().getSemester(fragment.context)
+            }
             changeThemeLayout = it.findViewById(R.id.changeThemeLayout)
             schoolSmartCardLayout = it.findViewById(R.id.smartCardLayout)
             examinationLayout = it.findViewById(R.id.examinationLayout)
@@ -94,8 +98,9 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
         val none = ArrayList<String>()
         val optionsPickerView: OptionsPickerView<*> =
             OptionsPickerBuilder(fragment.context!!) { i, i1, i2, view ->
-                mSemesterTextView.text = years.get(i) + " " + semester.get(i2)
-                Log.d(TAG, "onOptionsSelect: ")
+                mSemesterTextView.text = "${years[i]} ${semester[i2]}"
+                Log.d(TAG, "onOptionsSelect: ${years[i]} ${semester[i2]}")
+                StuContext.getDBService().updateSemester(fragment.context, "${years[i]} ${semester[i2]}")
             }.setTitleText("选择学期")
                 .setContentTextSize(18)
                 .setDividerColor(Color.GRAY)

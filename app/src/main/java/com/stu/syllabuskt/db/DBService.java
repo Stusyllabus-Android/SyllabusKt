@@ -38,6 +38,22 @@ public class DBService {
         return password == null ? "" : password;
     }
 
+    public String getSemester(Context context) {
+        String semester = null;
+        String sql = "select * from user_info";
+        Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase()
+                .rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            semester = cursor.getString(cursor.getColumnIndex("semester"));
+        }
+        cursor.close();
+        StuContext.getDataBaseHelper(context).getReadableDatabase().close();
+        if (semester == null) {
+            semester = "Non-existent";
+        }
+        return semester;
+    }
+
     public void writeBaseUserInfo(Context context, String account, String password) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("account", account);
@@ -46,6 +62,20 @@ public class DBService {
                 .getWritableDatabase()
                 .insert("base_user_info", null, contentValues);
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
+    }
+
+    public void writeSemester(Context context, String semester) {
+        ContentValues values = new ContentValues();
+        values.put("semester", semester);
+        StuContext.getDataBaseHelper(context).getWritableDatabase().insert("user_info", null, values);
+        StuContext.getDataBaseHelper(context).close();
+    }
+
+    public void updateSemester(Context context, String semester) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("semester", semester);
+        StuContext.getDataBaseHelper(context).getWritableDatabase().update("user_info", contentValues, null, null);
+        StuContext.getDataBaseHelper(context).close();
     }
 
     public void writeTimeTable(Context context, YiBanTimeTable.TableBean tableBean) {
