@@ -50,7 +50,7 @@ class SyllabusContainerFragment : BaseFragment() {
 
             override fun onPageSelected(position: Int) {
                 Log.i(TAG, "onPageSelected() >>> $position")
-                selectedWeek = position
+                selectedWeek = position + 1
                 titleTV.text = "第 ${position + 1} 周"
             }
 
@@ -58,6 +58,10 @@ class SyllabusContainerFragment : BaseFragment() {
                 Log.i(TAG, "onPageScrollStateChanged() >>> $state")
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
     companion object {
