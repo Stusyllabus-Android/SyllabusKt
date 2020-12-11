@@ -13,10 +13,6 @@ class SyllabusModel(mContext: Context) : ISyllabusContract.IModel {
 
     private val TAG = "SyllabusModel"
 
-    override fun getCurrentSemesterFromDisk() {
-
-    }
-
     override fun filterTables(
         tableBeanList: List<YiBanTimeTable.TableBean?>?,
         currentSemester: String?

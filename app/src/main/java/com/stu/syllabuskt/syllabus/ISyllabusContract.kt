@@ -15,7 +15,6 @@ interface ISyllabusContract {
     }
 
     interface IModel {
-        fun getCurrentSemesterFromDisk()
 
         fun filterTables(tableBeanList: List<YiBanTimeTable.TableBean?>?, currentSemester: String?): List<YiBanTimeTable.TableBean?>?
 

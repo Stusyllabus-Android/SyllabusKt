@@ -7,6 +7,9 @@ import android.database.Cursor;
 import com.stu.syllabuskt.StuContext;
 import com.stu.syllabuskt.bean.YiBanTimeTable;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * yuan
  * 2020/9/5
@@ -52,6 +55,31 @@ public class DBService {
             semester = "Non-existent";
         }
         return semester;
+    }
+
+    public List<YiBanTimeTable.TableBean> getTimeTable(Context context) {
+        List<YiBanTimeTable.TableBean> tableBeanList = new LinkedList<>();
+        String xnxq_name = null;
+        String kkb_key = null;
+        String kc_name = null;
+        String js_name = null;
+        String ks_name = null;
+        String sj_name = null;
+        String sql = "select * from yiban_table";
+        Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase().rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            xnxq_name = cursor.getString(cursor.getColumnIndex("xnxqName"));
+            kkb_key = cursor.getString(cursor.getColumnIndex("kkbKey"));
+            kc_name = cursor.getString(cursor.getColumnIndex("kcName"));
+            js_name = cursor.getString(cursor.getColumnIndex("jsName"));
+            ks_name = cursor.getString(cursor.getColumnIndex("ksName"));
+            sj_name = cursor.getString(cursor.getColumnIndex("sjName"));
+            if (xnxq_name != null) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
+            else break;
+        }
+        cursor.close();
+        StuContext.getDataBaseHelper(context).getReadableDatabase().close();
+        return tableBeanList;
     }
 
     public void writeBaseUserInfo(Context context, String account, String password) {
