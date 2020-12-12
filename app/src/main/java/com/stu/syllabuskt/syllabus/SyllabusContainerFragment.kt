@@ -2,14 +2,12 @@ package com.stu.syllabuskt.syllabus
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 
 import com.stu.syllabuskt.R
@@ -38,7 +36,7 @@ class SyllabusContainerFragment : BaseFragment() {
     }
 
     private fun initEvent() {
-        syllabusContainer.adapter = SyllabusPagerAdapter(fragmentManager!!, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        syllabusContainer.adapter = SyllabusPagerAdapter(childFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
         syllabusContainer.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
@@ -50,7 +48,7 @@ class SyllabusContainerFragment : BaseFragment() {
 
             override fun onPageSelected(position: Int) {
                 Log.i(TAG, "onPageSelected() >>> $position")
-                selectedWeek = position
+                selectedWeek = position + 1
                 titleTV.text = "第 ${position + 1} 周"
             }
 

@@ -6,4 +6,6 @@
 
     <color name="menuBackground">#DBD9D8</color>
     <color name="menuText">#191919</color>
+
+    <color name="gridColor">#402b2b2b</color>
 </resources>
