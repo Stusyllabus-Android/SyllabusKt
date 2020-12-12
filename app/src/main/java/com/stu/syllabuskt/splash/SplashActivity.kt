@@ -3,8 +3,6 @@ package com.stu.syllabuskt.splash
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.stu.syllabuskt.StuContext
-import com.stu.syllabuskt.toLoginView
-import com.stu.syllabuskt.toMainView
 
 class SplashActivity : AppCompatActivity() {
 

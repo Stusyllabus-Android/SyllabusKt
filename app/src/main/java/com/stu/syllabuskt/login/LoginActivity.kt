@@ -4,7 +4,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseActivity
-import com.stu.syllabuskt.toMainViewAct
+import com.stu.syllabuskt.splash.toMainViewAct
 import com.stu.syllabuskt.utils.ToastUtil
 import com.stu.syllabuskt.widget.LoadingDialog
 

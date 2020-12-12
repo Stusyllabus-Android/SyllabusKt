@@ -153,6 +153,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
             if (startWeek > weekIndex || endWeek < weekIndex) continue
 
             // TODO: 2019/12/5 写了大量重复的代码
+            // TODO: 2020/12/12 还没空优化，再见 
             if (showLessonBean.getDays().getW0() != null && showLessonBean.getDays().getW0() != "-") {
                 Log.d(TAG, "showSyllabus: 周日" + showLessonBean.getDays().getW0())
             }

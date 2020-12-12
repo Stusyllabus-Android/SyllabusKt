@@ -1,9 +1,8 @@
-package com.stu.syllabuskt
+package com.stu.syllabuskt.splash
 
 import android.content.Intent
 import com.stu.syllabuskt.login.LoginActivity
 import com.stu.syllabuskt.main.MainActivity
-import com.stu.syllabuskt.splash.SplashActivity
 
 /**
  *yuan
