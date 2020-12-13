@@ -1,20 +1,20 @@
 package com.stu.syllabuskt.personal
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder
 import com.bigkoo.pickerview.view.OptionsPickerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
-import kotlinx.android.synthetic.main.fragment_personal.view.*
-import java.util.*
+import com.stu.syllabuskt.main.MainActivity
+import com.stu.syllabuskt.personal.theme.ThemePickerAdapter
+import com.stu.syllabuskt.personal.theme.ThemePickerFragment
+import com.stu.syllabuskt.personal.theme.ThemeUtil
 import kotlin.collections.ArrayList
 
 /**
@@ -87,6 +87,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.changeSemesterLayout -> showSemesterSelect()
+            R.id.changeThemeLayout -> showThemePickView()
             R.id.smartCardLayout -> startCardView()
             R.id.examinationLayout -> startExamView()
             R.id.gradeLayout -> startGradeView()
@@ -114,6 +115,21 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             semester as List<Nothing>?
         )
         optionsPickerView.show()
+    }
+
+    private fun showThemePickView() {
+        ThemePickerFragment().apply {
+            setOnItemClickListener(object : ThemePickerAdapter.OnItemClickListener {
+                override fun onClick(name: String) {
+                    ThemeUtil.setStyleName(name)
+                    dismiss()
+                    startActivity(Intent(fragment.context, MainActivity::class.java))
+                    fragment.activity?.finish()
+                    fragment.activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                }
+            })
+            show(fragment.childFragmentManager, "ThemePickerFragment")
+        }
     }
 
     override fun onResume() {

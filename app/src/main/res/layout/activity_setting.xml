@@ -6,29 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".personal.setting.SettingActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="?attr/colorPrimary"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@android:color/white">
-
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="@string/setting"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"/>
-    </androidx.appcompat.widget.Toolbar>
+    <include layout="@layout/title_bar"/>
 
     <RelativeLayout
         android:id="@+id/helpAndFeedback"
@@ -103,7 +81,8 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/inIcon" />
+            android:layout_toStartOf="@+id/inIcon"
+            tools:ignore="RelativeOverlap" />
         <ImageView
             android:id="@+id/inIcon"
             android:src="@drawable/icon_in"
