@@ -1,10 +1,14 @@
 package com.stu.syllabuskt.widget;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -33,7 +37,11 @@ public class LoadingDialog extends Dialog {
         mContext = context;
         mCommonLoadingView = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.common_loading, null, false);
         if (text != null) ((TextView) mCommonLoadingView.findViewById(R.id.loadingTV)).setText(text);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        WindowManager wm = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display=wm.getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(point.x/3, ViewGroup.LayoutParams.WRAP_CONTENT);
         addContentView(mCommonLoadingView, lp);
     }
 

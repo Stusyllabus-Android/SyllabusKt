@@ -8,4 +8,5 @@
     <color name="menuText">#191919</color>
 
     <color name="gridColor">#402b2b2b</color>
+    <color name="lightGridColor">#20202020</color>
 </resources>
