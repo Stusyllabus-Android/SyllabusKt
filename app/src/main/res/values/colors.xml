@@ -15,4 +15,7 @@
     <color name="colorBiliDark">#fc4d80</color>
     <color name="colorBlack">#393A3F</color>
     <color name="colorBlackDark">#303135</color>
+    //oa gridview
+    <color name="lightGridColor">#20202020</color>
+
 </resources>

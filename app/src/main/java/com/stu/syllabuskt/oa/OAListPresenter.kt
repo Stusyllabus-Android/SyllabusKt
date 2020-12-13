@@ -22,7 +22,7 @@ class OAListPresenter(val mView: OAListContract.view, mContext: Context) : OALis
             }
 
             override fun onFailure(msg: String) {
-
+                mView.showErrMsg(msg)
             }
         })
     }

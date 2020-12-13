@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_oa_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    app:cardBackgroundColor="@color/material_white"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+    >
 
-    <TextView
-        android:id="@+id/oa_title"
-        android:text="关于举办汕头大学第二十四届“院际杯”辩论赛的通知"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/oa_department"
-        android:layout_below="@+id/oa_title"
-        android:text="校团委"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/oa_publish_date"
-        android:layout_below="@+id/oa_title"
-        android:layout_alignParentRight="true"
-        android:text="2020-12-05"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/item_oa_relativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true" />
+        >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/oa_title"
+            android:paddingTop="10dp"
+            android:paddingHorizontal="10dp"
+            android:text="关于举办汕头大学第二十四届“院际杯”辩论赛的通知"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/menuText"
+            android:textSize="15sp"
+            android:lines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/oa_department"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/oa_title"
+            android:text="校团委"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/oa_publish_date"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/oa_title"
+            android:layout_alignParentRight="true"
+            android:text="2020-12-05"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true" />
+
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="5dp"-->
+<!--            android:background="@color/lightGridColor"-->
+<!--            android:layout_below="@id/oa_publish_date"/>-->
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+
