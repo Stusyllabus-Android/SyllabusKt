@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stu.syllabuskt.R
@@ -16,6 +15,9 @@ import com.stu.syllabuskt.widget.LoadingDialog
 private const val POSITION_PARAM = "position_param"
 
 class OAListFragment : BaseFragment(), OAListContract.view {
+
+    private val TAG = "OAListFragment"
+
     private var position: Int? = null
 
     private lateinit var oaListContainer: RecyclerView
@@ -53,8 +55,10 @@ class OAListFragment : BaseFragment(), OAListContract.view {
     override fun setPagerAdapter(oaList: List<OABean>?) {
         runOnUiThread {
 //            loadingDialog.realDismiss()
-            oaListContainer.adapter = OAListAdapter(context!!, oaList)
-            oaListContainer.run { adapter?.notifyDataSetChanged() }
+            context?.let {
+                oaListContainer.adapter = OAListAdapter(it, oaList)
+                oaListContainer.run { adapter?.notifyDataSetChanged() }
+            }
         }
 
     }

@@ -15,7 +15,7 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.widget.LoadingDialog
 
-class OAMainFragment : BaseFragment() {
+class OAContainerFragment : BaseFragment() {
 
     private val TAG = "OAMainFragment"
 
@@ -44,7 +44,7 @@ class OAMainFragment : BaseFragment() {
     }
 
     private fun onInitView() {
-        oaListViewPager.adapter = OAMainPagerAdapter(childFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        oaListViewPager.adapter = OAPagerAdapter(childFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
     }
 
     private fun onInitEvent() {
@@ -77,6 +77,6 @@ class OAMainFragment : BaseFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = OAMainFragment()
+        fun newInstance() = OAContainerFragment()
     }
 }
