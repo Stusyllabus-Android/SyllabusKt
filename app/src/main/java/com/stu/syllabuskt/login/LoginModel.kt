@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Response
+import java.io.UnsupportedEncodingException
+import java.lang.Exception
+import java.net.URLEncoder
 
 /**
  *yuan
@@ -47,12 +50,12 @@ class LoginModel(private val mContext: Context) {
                     ) {
 //                        Log.i(TAG, response.body().toString())
                         // TODO: 2020/12/4 Android 6.0.1会crash
-                        val token = Jsoup.parse(response.body().toString())
+                        val verifyToken = Jsoup.parse(response.body().toString())
                             .getElementsByAttributeValue("name", "__RequestVerificationToken")
                             .first()
                             .attr("value")
-                        Log.i(TAG, "login() >>> token is : $token")
-                        yiBanApi.login("$account@stu.edu.cn", password, token)
+                        Log.i(TAG, "login() >>> token is : $verifyToken")
+                        yiBanApi.login("$account@stu.edu.cn", password, verifyToken)
                             .enqueue(object : retrofit2.Callback<String> {
                                 override fun onResponse(
                                     call: Call<String>,
@@ -70,8 +73,13 @@ class LoginModel(private val mContext: Context) {
                                             Log.i(TAG, response.body()?.nonce ?: "")
                                             Log.i(TAG, response.body()?.token ?: "")
                                             StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
-
-                                            yiBanApi.getTimeTable(response.body()?.vid ?: 0, response.body()?.timestamp ?: 0, response.body()?.app, response.body()?.nonce, response.body()?.token).enqueue(object : retrofit2.Callback<YiBanTimeTable> {
+                                            var token = ""
+                                            try {
+                                                token = URLEncoder.encode(response.body()?.token ?: "", "UTF-8")
+                                            } catch (e: Exception) {
+                                                e.printStackTrace()
+                                            }
+                                            yiBanApi.getTimeTable(response.body()?.vid ?: 0, response.body()?.timestamp ?: 0, response.body()?.app, response.body()?.nonce, token).enqueue(object : retrofit2.Callback<YiBanTimeTable> {
                                                 override fun onResponse(
                                                     call: Call<YiBanTimeTable>,
                                                     response: Response<YiBanTimeTable>
