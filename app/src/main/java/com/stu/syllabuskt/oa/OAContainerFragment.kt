@@ -15,7 +15,7 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.widget.LoadingDialog
 
-class OAMainFragment : BaseFragment() {
+class OAContainerFragment : BaseFragment() {
 
     private val TAG = "OAMainFragment"
 
@@ -35,8 +35,8 @@ class OAMainFragment : BaseFragment() {
         loadingDialog = LoadingDialog(context!!, null)
         return inflater.inflate(R.layout.fragment_oa, container, false).apply {
             titleTextView = findViewById<TextView>(R.id.titleBarTV).apply { text = "第 $currentPageIndex 页" }
-            oaRefreshLayout = findViewById(R.id.oaRefreshLayout)
-            oaListViewPager = findViewById(R.id.oaListVP)
+            oaRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.oaRefreshLayout).apply { isEnabled = false }
+            oaListViewPager = findViewById<ViewPager>(R.id.oaListVP).apply { offscreenPageLimit = 2 }
             oaSearchFAB = findViewById(R.id.oaSearchFAB)
             onInitView()
             onInitEvent()
@@ -44,7 +44,7 @@ class OAMainFragment : BaseFragment() {
     }
 
     private fun onInitView() {
-        oaListViewPager.adapter = OAMainPagerAdapter(fragmentManager!!, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        oaListViewPager.adapter = OAPagerAdapter(childFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
     }
 
     private fun onInitEvent() {
@@ -77,6 +77,6 @@ class OAMainFragment : BaseFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = OAMainFragment()
+        fun newInstance() = OAContainerFragment()
     }
 }

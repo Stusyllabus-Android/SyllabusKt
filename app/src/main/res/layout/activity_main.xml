@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/mainContainer"
+    <com.stu.syllabuskt.widget.StuMainViewPager
+        android:id="@+id/mainViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

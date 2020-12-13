@@ -9,7 +9,7 @@
         android:title="@string/oa"
         android:icon="@drawable/icon_oa"/>
     <item
-        android:id="@+id/person"
+        android:id="@+id/personal"
         android:title="@string/personal"
         android:icon="@drawable/icon_person"/>
 </menu>
