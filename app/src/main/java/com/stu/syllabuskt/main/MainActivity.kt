@@ -2,45 +2,57 @@ package com.stu.syllabuskt.main
 
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseActivity
+import com.stu.syllabuskt.oa.OAContainerFragment
+import com.stu.syllabuskt.personal.PersonalFragment
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 import com.stu.syllabuskt.utils.ActionTrigger
+import com.stu.syllabuskt.widget.StuMainViewPager
 
-class MainActivity : BaseActivity(), IMainView {
+class MainActivity : BaseActivity() {
 
-    val TAG = "MainActivity"
+    private val TAG = "MainActivity"
 
-    lateinit var mainPresenter: MainPresenter
+    lateinit var mainViewPager: StuMainViewPager
 
     val trigger = ActionTrigger(250)
 
     override fun init() {
-        mainPresenter = MainPresenter(this)
+        initBottomNavigationView()
+        mainViewPager = findViewById(R.id.mainViewPager)
+        val fragmentList = arrayListOf<Fragment>().apply {
+            add(SyllabusContainerFragment.newInstance())
+            add(OAContainerFragment.newInstance())
+            add(PersonalFragment.newInstance())
+        }
+        mainViewPager.adapter = MainPagerAdapter(supportFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragmentList)
     }
 
     override fun getContentView(): Int {
         return R.layout.activity_main
     }
 
-    override fun initBottomNavigationView(fragmentList: List<Fragment>) {
+    private fun initBottomNavigationView() {
         findViewById<BottomNavigationView>(R.id.navigation).setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
                 if (!trigger.canTrigger()) return false
-                onTabItemSelected(fragmentList, p0.itemId)
+                onTabItemSelected(p0.itemId)
                 return true
             }
         })
     }
 
-    override fun onTabItemSelected(fragmentList: List<Fragment>, id: Int) {
+    private fun onTabItemSelected(id: Int) {
         when(id){
-            R.id.syllabus -> fragmentList[0]
-            R.id.oa -> fragmentList[1]
-            R.id.person -> fragmentList[2]
-            else -> fragmentList[0]
+            R.id.syllabus -> 0
+            R.id.oa -> 1
+            R.id.personal -> 2
+            else -> 0
         }.let {
-            supportFragmentManager.beginTransaction().replace(R.id.mainContainer, it).commit()
+            mainViewPager.currentItem = it
         }
     }
 }
