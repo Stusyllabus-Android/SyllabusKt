@@ -3,7 +3,6 @@ package com.stu.syllabuskt.oa
 import android.content.Context
 import com.stu.syllabuskt.api.RetrofitProvider
 import com.stu.syllabuskt.api.YiBanApi
-import com.stu.syllabuskt.bean.OABean
 import retrofit2.Call
 import retrofit2.Response
 

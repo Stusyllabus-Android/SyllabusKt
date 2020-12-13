@@ -61,6 +61,12 @@ public class OADetailActivity extends BaseActivity implements OADetailContract.v
     @Override
     public void showErrMsg(@NotNull String msg) {
         ToastUtil.showShort(this,msg);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.realDismiss();
+            }
+        });
     }
 
     @Override

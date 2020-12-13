@@ -1,7 +1,6 @@
 package com.stu.syllabuskt.oa
 
 import android.content.Context
-import com.stu.syllabuskt.utils.ToastUtil
 
 /**
  * Create by yxbao on 2020/12/13
@@ -11,10 +10,9 @@ class OADetailPresenter(val mView: OADetailContract.view, mContext: Context) : O
     private val oaModel = OADetailModel(mContext)
 
     override fun loadOADetail(id: Int) {
-        mView.showLoading()
         oaModel.getOADetail(id,object :OADetailModel.OADetailModelListener{
             override fun onProgress() {
-
+                mView.showLoading()
             }
 
             override fun onSuccess(content: String?) {
@@ -22,7 +20,7 @@ class OADetailPresenter(val mView: OADetailContract.view, mContext: Context) : O
             }
 
             override fun onFailure(msg: String) {
-                mView.showErrMsg(msg)
+                mView.showErrMsg("网络出错，请稍后重试")
             }
         })
 
