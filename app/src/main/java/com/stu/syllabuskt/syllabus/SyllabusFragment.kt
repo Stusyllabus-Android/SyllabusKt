@@ -121,10 +121,8 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
             for (j in 0..12) {
                 val lessonLinearLayout = LayoutInflater.from(activity)
                     .inflate(R.layout.lesson_grid, null, false) as LinearLayout
-                val lessonRippleLayout: MaterialRippleLayout =
-                    lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
-                val lessonTextView =
-                    lessonLinearLayout.findViewById<View>(R.id.lessonTextView) as TextView
+                val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
+                val lessonTextView = lessonLinearLayout.findViewById<View>(R.id.lessonTextView) as TextView
                 lessonLinearLayout.visibility = View.INVISIBLE
                 lessonRippleLayout.isEnabled = false
                 lessonTextView.width = gridWidth
