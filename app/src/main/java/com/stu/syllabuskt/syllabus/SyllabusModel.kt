@@ -110,8 +110,12 @@ class SyllabusModel(mContext: Context) : ISyllabusContract.IModel {
                 }
             }
             val indexOfKcName = currentTables[i]!!.getKcName().indexOf(']') //去掉课程名前方括号中的内容
+            var kcName = currentTables[i]!!.kcName.substring(indexOfKcName + 1)
+            if (kcName.indexOf("[") != -1) {
+                kcName = kcName.substring(0, kcName.indexOf("["))
+            }
             val showLessonBean = Lesson(
-                currentTables[i]!!.kcName.substring(indexOfKcName + 1), java.lang.String.valueOf(
+                kcName, java.lang.String.valueOf(
                     currentTables[i]!!.getKkbKey()
                 ), currentTables[i]!!.getJsName(), currentTables[i]!!
                     .getKsName(), duration, daysBean, "0"

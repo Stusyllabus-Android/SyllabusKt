@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         super.onCreate(savedInstanceState)
         arguments?.let {
             selectedWeek = it.getInt(POSITION_PARAM)
-            weekIndex = selectedWeek!! - 1
+            weekIndex = selectedWeek!! + 1
         }
     }
 
@@ -120,7 +121,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         for (i in 0..6) {
             for (j in 0..12) {
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
                 val lessonTextView = lessonLinearLayout.findViewById<View>(R.id.lessonTextView) as TextView
                 lessonLinearLayout.visibility = View.INVISIBLE
@@ -139,7 +140,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     }
 
     override fun showSyllabus(lessonBeanList: List<Lesson>) {
-        Log.d(TAG, "showSyllabus: " + lessonBeanList.size)
+        Log.d(TAG, "showSyllabus: lessonBeanList.size is ${lessonBeanList.size} week index is $weekIndex")
 
         // 遍历转换格式后的课程并添加至格子
         var i = 0
@@ -159,7 +160,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 Log.d(TAG, "showSyllabus: 周一" + showLessonBean.getDays().getW1())
                 val time: List<String> = showLessonBean.getDays().getW1().split("-")
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout =
                     lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
                 lessonRippleLayout.setOnClickListener(View.OnClickListener {
@@ -202,7 +203,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 Log.d(TAG, "showSyllabus: 周二" + showLessonBean.getDays().getW2())
                 val time: List<String> = showLessonBean.getDays().getW2().split("-")
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
                 lessonRippleLayout.setOnClickListener(View.OnClickListener {
                     val days: String =
@@ -237,7 +238,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 Log.d(TAG, "showSyllabus: 周三" + showLessonBean.getDays().getW3())
                 val time: List<String> = showLessonBean.getDays().getW3().split("-")
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
                 lessonRippleLayout.setOnClickListener(View.OnClickListener {
                     val days: String =
@@ -271,7 +272,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 Log.d(TAG, "showSyllabus: 周四" + showLessonBean.getDays().getW4())
                 val time: List<String> = showLessonBean.getDays().getW4().split("-")
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
                 lessonRippleLayout.setOnClickListener(View.OnClickListener {
                     val days: String = showLessonBean.getDuration().toString() + "周\n" + showLessonBean.getDays().toString()
@@ -310,8 +311,9 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 Log.d(TAG, "showSyllabus: 周五" + showLessonBean.getDays().getW5())
                 val time: List<String> = showLessonBean.getDays().getW5().split("-")
                 val lessonLinearLayout = LayoutInflater.from(activity)
-                    .inflate(R.layout.lesson_grid, null, false) as LinearLayout
+                    .inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
                 val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById<View>(R.id.lessonInfoRipple) as MaterialRippleLayout
+                lessonRippleLayout.foregroundGravity = Gravity.CENTER
                 lessonRippleLayout.setOnClickListener(View.OnClickListener {
                     val days: String =
                         showLessonBean.getDuration().toString() + "周\n" + showLessonBean.getDays()
@@ -339,7 +341,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 lessonTextView.setBackgroundDrawable(shape)
                 val rowSpec = GridLayout.spec(time[0].toInt() - 1, time[1].toInt() - time[0].toInt() + 1)
                 val columnSpec = GridLayout.spec(5)
-                gridLayout.addView(lessonLinearLayout, GridLayout.LayoutParams(rowSpec, columnSpec))
+                gridLayout.addView(lessonRippleLayout, GridLayout.LayoutParams(rowSpec, columnSpec))
             }
             if (showLessonBean.getDays().getW6() != null && showLessonBean.getDays().getW6() != "-") {
                 Log.d(TAG, "showSyllabus: 周六" + showLessonBean.getDays().getW6())
