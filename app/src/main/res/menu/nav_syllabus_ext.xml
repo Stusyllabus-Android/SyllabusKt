@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/setWeek"
+            android:icon="@drawable/icon_ding"
+            android:title="@string/set_curr_week"/>
+        <item android:id="@+id/addLesson"
+            android:icon="@drawable/icon_add"
+            android:title="@string/add_lesson"/>
+        <item android:id="@+id/deleteLesson"
+            android:icon="@drawable/icon_delete"
+            android:title="@string/delete_lesson"/>
+    </group>
+</menu>
