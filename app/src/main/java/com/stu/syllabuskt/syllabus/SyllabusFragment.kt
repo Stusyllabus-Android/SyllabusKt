@@ -136,7 +136,9 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     }
 
     override fun showMSG(msg: String) {
-        ToastUtil.showShort(context, msg)
+        if (weekIndex == 1) {
+            ToastUtil.showLong(context, msg)
+        }
     }
 
     override fun showSyllabus(lessonList: List<Lesson>) {

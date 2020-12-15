@@ -1,4 +1,4 @@
-package com.stu.syllabuskt.widget
+package com.stu.syllabuskt.utils
 
 import android.content.Context
 

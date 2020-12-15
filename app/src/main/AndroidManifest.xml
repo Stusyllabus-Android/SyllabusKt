@@ -19,7 +19,6 @@
         tools:targetApi="n">
         <activity android:name=".syllabus.ext.delete.DeleteLessonActivity"></activity>
         <activity android:name=".syllabus.ext.add.AddLessonActivity" />
-        <activity android:name=".syllabus.ext.add.AddLessonActivity" />
         <activity android:name=".personal.own.OwnActivity" />
         <activity android:name=".personal.setting.SettingActivity" />
         <activity android:name=".personal.grade.GradeActivity" />
