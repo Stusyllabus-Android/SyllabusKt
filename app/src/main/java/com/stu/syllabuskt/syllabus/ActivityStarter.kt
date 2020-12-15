@@ -10,7 +10,7 @@ import com.stu.syllabuskt.syllabus.ext.delete.DeleteLessonActivity
  */
 
 fun BaseFragment.startAddLesson() {
-    startActivity(Intent(this.context, AddLessonActivity::class.java))
+    startActivityForResult(Intent(this.context, AddLessonActivity::class.java), SyllabusContainerFragment.ADD_LESSON_CODE)
 }
 
 fun BaseFragment.startDeleteLesson() {

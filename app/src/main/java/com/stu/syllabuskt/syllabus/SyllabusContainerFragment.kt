@@ -1,5 +1,6 @@
 package com.stu.syllabuskt.syllabus
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,9 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener
-import com.bigkoo.pickerview.view.OptionsPickerView
 import com.google.android.material.navigation.NavigationView
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment
@@ -103,8 +101,17 @@ class SyllabusContainerFragment : BaseFragment() {
         drawerLayout.closeDrawer(GravityCompat.START)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_LESSON_CODE && data?.getStringExtra("hadAddNewLesson") == "hadAddNewLesson") {
+            newInstance()
+        }
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = SyllabusContainerFragment()
+
+        const val ADD_LESSON_CODE = 1
     }
 }
