@@ -23,6 +23,8 @@
     <string name="choose">请选择</string>
     <string name="time_">时间　　</string>
     <string name="submit">确认</string>
+    <string name="negative">取消</string>
+    <string name="positive">确定</string>
     <!-- 个人模块-->
     <string name="empty_sign">个性签名为空</string>
     <string name="change_semester">切换学期</string>
