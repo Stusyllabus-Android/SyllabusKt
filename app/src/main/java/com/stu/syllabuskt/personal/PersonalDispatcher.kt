@@ -30,7 +30,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     lateinit var changeSemesterLayout: RelativeLayout
     lateinit var changeThemeLayout: RelativeLayout
     lateinit var schoolSmartCardLayout: RelativeLayout
-    lateinit var examinationLayout: RelativeLayout
+//    lateinit var examinationLayout: RelativeLayout
     lateinit var gradeLayout: RelativeLayout
     lateinit var settingLayout: RelativeLayout
     lateinit var currentAccountTV: TextView
@@ -58,7 +58,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             }
             changeThemeLayout = it.findViewById(R.id.changeThemeLayout)
             schoolSmartCardLayout = it.findViewById(R.id.smartCardLayout)
-            examinationLayout = it.findViewById(R.id.examinationLayout)
+//            examinationLayout = it.findViewById(R.id.examinationLayout)
             gradeLayout = it.findViewById(R.id.gradeLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
         }
@@ -77,7 +77,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             changeSemesterLayout.setOnClickListener(it)
             changeThemeLayout.setOnClickListener(it)
             schoolSmartCardLayout.setOnClickListener(it)
-            examinationLayout.setOnClickListener(it)
+//            examinationLayout.setOnClickListener(it)
             gradeLayout.setOnClickListener(it)
             settingLayout.setOnClickListener(it)
 
@@ -89,7 +89,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             R.id.changeSemesterLayout -> showSemesterSelect()
             R.id.changeThemeLayout -> showThemePickView()
             R.id.smartCardLayout -> startCardView()
-            R.id.examinationLayout -> startExamView()
+//            R.id.examinationLayout -> startExamView()
             R.id.gradeLayout -> startGradeView()
             R.id.settingLayout -> startSetting()
         }
