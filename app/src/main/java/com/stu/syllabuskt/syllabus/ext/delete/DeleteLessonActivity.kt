@@ -9,6 +9,7 @@ import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseActivity
 import com.stu.syllabuskt.bean.Lesson
 import com.stu.syllabuskt.bean.YiBanTimeTable
+import com.stu.syllabuskt.widget.TipDialog
 
 class DeleteLessonActivity : BaseActivity() {
 
@@ -39,9 +40,17 @@ class DeleteLessonActivity : BaseActivity() {
         adapter = LessonAdapter(this, localCustomLesson).apply {
             setOnDeleteIconClickListener(object : LessonAdapter.OnDeleteIconClickListener {
                 override fun onDeleteIconClickListener(position: Int) {
-                    deleteLessonModel.deleteLesson(localCustomLesson?.get(position)?.kkbKey)
-                    localCustomLesson?.removeAt(position)
-                    notifyDataSetChanged()
+                    TipDialog.Builder(context)
+                        .title("提示")
+                        .content("确定删除该课程？")
+                        .negative("取消")
+                        .positive("确定")
+                        .setPositiveClickListener {
+                            deleteLessonModel.deleteLesson(localCustomLesson?.get(position)?.kkbKey)
+                            localCustomLesson?.removeAt(position)
+                            notifyDataSetChanged()
+                        }.show()
+
                 }
             })
         }

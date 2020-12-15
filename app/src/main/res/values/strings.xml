@@ -18,7 +18,7 @@
     <string name="add_lesson">添加课程</string>
     <string name="delete_lesson">删除课程</string>
     <string name="lesson_name">课程名　</string>
-    <string name="classroom_name">教室　　</string>
+    <string name="classroom_name">地点　　</string>
     <string name="week_">周数　　</string>
     <string name="choose">请选择</string>
     <string name="time_">时间　　</string>

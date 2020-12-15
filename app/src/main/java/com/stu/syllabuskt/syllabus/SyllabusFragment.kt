@@ -139,12 +139,12 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         ToastUtil.showShort(context, msg)
     }
 
-    override fun showSyllabus(lessonBeanList: List<Lesson>) {
-        Log.d(TAG, "showSyllabus: lessonBeanList.size is ${lessonBeanList.size} week index is $weekIndex")
+    override fun showSyllabus(lessonList: List<Lesson>) {
+        Log.d(TAG, "showSyllabus: lessonBeanList.size is ${lessonList.size} week index is $weekIndex")
 
         // 遍历转换格式后的课程并添加至格子
         var i = 0
-        for (showLessonBean in lessonBeanList) {
+        for (showLessonBean in lessonList) {
             showLessonBean.bgColor = ColorUtil.bgColors.get(i++ % ColorUtil.bgColors.size)
             val week: List<String> = showLessonBean.getDuration().split("-")
             val startWeek = week[0].toInt()

@@ -11,26 +11,39 @@ import com.stu.syllabuskt.R
 /**
  * Create by yuan on 2020/12/15
  */
-class TipDialog private constructor(context: Context, builder: Builder) : Dialog(context) {
+class TipDialog private constructor(context: Context, private val builder: Builder) : Dialog(context) {
+
+    private lateinit var titleTV: TextView
+    private lateinit var contentTV: TextView
 
     init {
         setContentView(R.layout.tip_dialog)
+        titleTV = findViewById(R.id.title)
+        contentTV = findViewById(R.id.content)
         window?.setGravity(Gravity.CENTER)
-        window?.setLayout(LayoutUtil.getScreenWidth(context) / 3 * 2, LinearLayout.LayoutParams.WRAP_CONTENT)
-        findViewById<TextView>(R.id.title).text = builder.title
-        findViewById<TextView>(R.id.content).text = builder.content
+    }
+
+    override fun show() {
+        titleTV.text = builder.title
+        contentTV.text = builder.content
         findViewById<TextView>(R.id.negative).apply {
             text = builder.negative
-            setOnClickListener(builder.negativeListener)
+            setOnClickListener { v ->
+                builder.negativeListener?.onClick(v)
+                dismiss()
+            }
         }
         findViewById<TextView>(R.id.positive).apply {
             text = builder.positive
-            setOnClickListener(builder.positiveListener)
+            setOnClickListener { v ->
+                builder.positiveListener?.onClick(v)
+                dismiss()
+            }
         }
+        super.show()
     }
 
-    inner class  Builder {
-
+    class Builder(val context: Context) {
         var title: String? = null
         var content: String? = null
 
@@ -71,8 +84,9 @@ class TipDialog private constructor(context: Context, builder: Builder) : Dialog
         }
 
         fun show() {
-            setCanceledOnTouchOutside(false)
-            TipDialog(context, this).show()
+            TipDialog(context, this).apply {
+                setCanceledOnTouchOutside(false)
+            }.show()
         }
     }
 }
