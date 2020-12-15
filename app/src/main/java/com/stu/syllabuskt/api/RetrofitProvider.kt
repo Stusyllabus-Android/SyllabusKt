@@ -16,20 +16,29 @@ import java.util.concurrent.TimeUnit
  **/
 object RetrofitProvider {
     private val YIBAN_BASE_URL = "https://yiban.stu.edu.cn/"
+    private val OFFICIAL_WC_BASE_URL = "http://wechat.stu.edu.cn/"
 
     fun getYiBanRetrofit(context: Context): Retrofit {
         return Retrofit.Builder()
-            .client(
-                OkHttpClient.Builder()
-                    .connectTimeout(10, TimeUnit.SECONDS)
-                    .cookieJar(
-                        PersistentCookieJar(
-                            SetCookieCache(),
-                            SharedPrefsCookiePersistor(context)
-                        )
-                    )
-                    .build())
+            .client(OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .callTimeout(60, TimeUnit.SECONDS)
+                .cookieJar(PersistentCookieJar(SetCookieCache(),SharedPrefsCookiePersistor(context)))
+                .build())
             .baseUrl(YIBAN_BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun getOfficialWCRetrofit(context: Context): Retrofit {
+        return Retrofit.Builder()
+            .client(OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .callTimeout(60, TimeUnit.SECONDS)
+                .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context)))
+                .build())
+            .baseUrl(OFFICIAL_WC_BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
