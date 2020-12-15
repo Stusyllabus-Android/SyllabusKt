@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/nav_syllabus_drawerlayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context=".syllabus.SyllabusFragment">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/syllabus_container"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/syllabusContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_syllabus"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/nav_syllabus_ext"/>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

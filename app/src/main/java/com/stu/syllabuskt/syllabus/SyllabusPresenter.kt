@@ -12,7 +12,7 @@ class SyllabusPresenter(private val mContext: Context, val view: ISyllabusContra
     private val model = SyllabusModel(mContext)
 
     fun init() {
-        view.showSyllabus(model.convertTablesToLessons(model.filterTables(StuContext.getDBService().getTimeTable(mContext), StuContext.getDBService().getSemester(mContext))) as List<Lesson>)
+        view.showSyllabus(model.convertTablesToLessons(model.filterTables(StuContext.getDBService().getSyllabus(mContext), StuContext.getDBService().getSemester(mContext))) as List<Lesson>)
     }
 
 }

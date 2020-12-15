@@ -32,7 +32,7 @@ class SyllabusModel(mContext: Context) : ISyllabusContract.IModel {
                 tableBeanList[i]?.let { currentTables.add(it) }
             }
         }
-        Log.d(TAG, "filterTables: " + currentTables.size)
+        Log.d(TAG, "filterTables: currentSemester is $currentSemester, currentTables size is ${currentTables.size}")
         return currentTables
     }
 

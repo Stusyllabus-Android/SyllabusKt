@@ -8,12 +8,12 @@ import com.stu.syllabuskt.api.RetrofitProvider
 import com.stu.syllabuskt.api.YiBanApi
 import com.stu.syllabuskt.bean.YiBanTimeTable
 import com.stu.syllabuskt.bean.YiBanToken
+import com.stu.syllabuskt.db.SyllabusSourceType
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Response
-import java.io.UnsupportedEncodingException
 import java.lang.Exception
 import java.net.URLEncoder
 
@@ -85,7 +85,7 @@ class LoginModel(private val mContext: Context) {
                                                     response: Response<YiBanTimeTable>
                                                 ) {
                                                     response.body()?.table?.forEach { it ->
-                                                        StuContext.getDBService().writeTimeTable(mContext, it)
+                                                        StuContext.getDBService().writeSyllabus(mContext, account, it, SyllabusSourceType.Official)
                                                     }
                                                     StuContext.getDBService().writeSemester(mContext, "Non-existent")
                                                     loginListener.onSuccess()

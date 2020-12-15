@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".syllabus.ext.add.AddLessonActivity">
+
+    <include layout="@layout/title_bar"
+        android:id="@+id/include"/>
+
+    <LinearLayout
+        android:layout_below="@+id/include"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/lesson_name"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp" />
+
+            <EditText
+                android:id="@+id/lessonNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="(必填, 20字以内)"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColorHint="?attr/colorPrimary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_margin="8dp"
+            android:background="@color/defaultShowColor"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/classroom_name"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp" />
+
+            <EditText
+                android:id="@+id/classroomEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="(选填)"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColorHint="?attr/colorPrimary"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_margin="8dp"
+            android:background="@color/defaultShowColor"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center"
+                android:text="@string/week_"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"
+                android:layout_marginStart="16dp" />
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true">
+                <TextView
+                    android:id="@+id/customWeek"
+                    android:layout_margin="5dp"
+                    android:text="@string/choose"
+                    android:layout_marginRight="15dp"
+                    android:textSize="16sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_margin="8dp"
+            android:background="@color/defaultShowColor"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center"
+                android:text="@string/time_"
+                android:textColor="@color/defaultTextColor"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/detail"
+                android:layout_margin="5dp"
+                android:text="@string/choose"
+                android:layout_marginRight="15dp"
+                android:textSize="16sp"
+                android:textColor="?attr/colorPrimary"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_margin="8dp"
+            android:background="@color/defaultShowColor"/>
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/lessonRipple"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            app:mrl_rippleAlpha="0.1"
+            app:mrl_rippleColor="#000000"
+            app:mrl_rippleDuration="500"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="4dp">
+
+            <Button
+                android:id="@+id/addLessonButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:elevation="8dp"
+                android:text="@string/submit"
+                android:textColor="@color/material_white"
+                android:textSize="16sp"
+                tools:targetApi="lollipop"/>
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+
+</RelativeLayout>

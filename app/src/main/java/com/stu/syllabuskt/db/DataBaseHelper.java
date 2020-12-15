@@ -19,10 +19,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createBaseUserInfoTable = "create table base_user_info(account varchar(64), password varchar(64))";
         String createUserInfoTable = "create table user_info(id varchar(64), avatar varchar(64), nickname varchar(64), signature varchar(64), semester varchar(64))";
-        String createYiBanTable = "create table yiban_table(xnxqName varchar(64), kkbKey varchar(64), kcName varchar(64), jsName varchar(64), ksName varchar(64), sjName varchar(64))";
+        String createOfficialSyllabus = "create table official_syllabus(account varchar(64), xnxqName varchar(64), kkbKey varchar(64), kcName varchar(64), jsName varchar(64), ksName varchar(64), sjName varchar(64))";
+        String createCustomizedSyllabus = "create table customized_syllabus(account varchar(64), xnxqName varchar(64), kkbKey varchar(64), kcName varchar(64), jsName varchar(64), ksName varchar(64), sjName varchar(64))";
         db.execSQL(createBaseUserInfoTable);
         db.execSQL(createUserInfoTable);
-        db.execSQL(createYiBanTable);
+        db.execSQL(createOfficialSyllabus);
+        db.execSQL(createCustomizedSyllabus);
     }
 
     @Override

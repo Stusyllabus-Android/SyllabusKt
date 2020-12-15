@@ -7,6 +7,7 @@ import android.database.Cursor;
 import com.stu.syllabuskt.StuContext;
 import com.stu.syllabuskt.bean.YiBanTimeTable;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,29 +58,76 @@ public class DBService {
         return semester;
     }
 
-    public List<YiBanTimeTable.TableBean> getTimeTable(Context context) {
+    public List<YiBanTimeTable.TableBean> getSyllabus(Context context) {
         List<YiBanTimeTable.TableBean> tableBeanList = new LinkedList<>();
+        String account = null;
         String xnxq_name = null;
         String kkb_key = null;
         String kc_name = null;
         String js_name = null;
         String ks_name = null;
         String sj_name = null;
-        String sql = "select * from yiban_table";
-        Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase().rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            xnxq_name = cursor.getString(cursor.getColumnIndex("xnxqName"));
-            kkb_key = cursor.getString(cursor.getColumnIndex("kkbKey"));
-            kc_name = cursor.getString(cursor.getColumnIndex("kcName"));
-            js_name = cursor.getString(cursor.getColumnIndex("jsName"));
-            ks_name = cursor.getString(cursor.getColumnIndex("ksName"));
-            sj_name = cursor.getString(cursor.getColumnIndex("sjName"));
-            if (xnxq_name != null) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
+        String sqlForOfficialSyllabus = "select * from official_syllabus";
+        Cursor cursorForOfficialSyllabus = StuContext.getDataBaseHelper(context).getReadableDatabase().rawQuery(sqlForOfficialSyllabus, null);
+        while (cursorForOfficialSyllabus.moveToNext()) {
+            account = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("account"));
+            xnxq_name = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("xnxqName"));
+            kkb_key = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("kkbKey"));
+            kc_name = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("kcName"));
+            js_name = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("jsName"));
+            ks_name = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("ksName"));
+            sj_name = cursorForOfficialSyllabus.getString(cursorForOfficialSyllabus.getColumnIndex("sjName"));
+            if (xnxq_name != null && account.equals(StuContext.getDBService().getUserAccount(context))) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
             else break;
         }
-        cursor.close();
+        cursorForOfficialSyllabus.close();
+        String sqlForCustomizedSyllabus = "select * from customized_syllabus";
+        Cursor cursorForCustomizedSyllabus = StuContext.getDataBaseHelper(context).getReadableDatabase().rawQuery(sqlForCustomizedSyllabus, null);
+        while (cursorForCustomizedSyllabus.moveToNext()) {
+            account = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("account"));
+            xnxq_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("xnxqName"));
+            kkb_key = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("kkbKey"));
+            kc_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("kcName"));
+            js_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("jsName"));
+            ks_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("ksName"));
+            sj_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("sjName"));
+            if (xnxq_name != null && account.equals(StuContext.getDBService().getUserAccount(context))) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
+            else break;
+        }
+        cursorForCustomizedSyllabus.close();
         StuContext.getDataBaseHelper(context).getReadableDatabase().close();
         return tableBeanList;
+    }
+
+    public ArrayList<YiBanTimeTable.TableBean> getCustomizedSyllabus(Context context, String account) {
+        ArrayList<YiBanTimeTable.TableBean> tableBeanList = new ArrayList<>();
+        String xnxq_name = null;
+        String kkb_key = null;
+        String kc_name = null;
+        String js_name = null;
+        String ks_name = null;
+        String sj_name = null;
+        String sqlForCustomizedSyllabus = "select * from customized_syllabus where account like ? ";
+        Cursor cursorForCustomizedSyllabus = StuContext.getDataBaseHelper(context).getReadableDatabase().rawQuery(sqlForCustomizedSyllabus, new String[]{account});
+        while (cursorForCustomizedSyllabus.moveToNext()) {
+            xnxq_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("xnxqName"));
+            kkb_key = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("kkbKey"));
+            kc_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("kcName"));
+            js_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("jsName"));
+            ks_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("ksName"));
+            sj_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("sjName"));
+            if (xnxq_name != null && account.equals(StuContext.getDBService().getUserAccount(context))) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
+            else break;
+        }
+        cursorForCustomizedSyllabus.close();
+        StuContext.getDataBaseHelper(context).getReadableDatabase().close();
+        return tableBeanList;
+    }
+
+    public void deleteInCustomizedSyllabus(Context context, Long id) {
+        String sql = "delete from customized_syllabus where kkbKey = '" + id + "' ";
+        StuContext.getDataBaseHelper(context).getWritableDatabase().execSQL(sql);
+        StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
 
     public void writeBaseUserInfo(Context context, String account, String password) {
@@ -106,24 +154,31 @@ public class DBService {
         StuContext.getDataBaseHelper(context).close();
     }
 
-    public void writeTimeTable(Context context, YiBanTimeTable.TableBean tableBean) {
+    public void writeSyllabus(Context context, String account, YiBanTimeTable.TableBean tableBean, SyllabusSourceType syllabusSourceType) {
         ContentValues values = new ContentValues();
+        values.put("account", account);
         values.put("xnxqName", tableBean.xnxqName);
         values.put("kkbKey", tableBean.kkbKey);
         values.put("kcName", tableBean.kcName);
         values.put("jsName", tableBean.jsName);
         values.put("ksName", tableBean.ksName);
         values.put("sjName", tableBean.sjName);
-        StuContext.getDataBaseHelper(context)
-                .getWritableDatabase()
-                .insert("yiban_table", null, values);
+        if (syllabusSourceType == SyllabusSourceType.Official) {
+            StuContext.getDataBaseHelper(context)
+                    .getWritableDatabase()
+                    .insert("official_syllabus", null, values);
+        } else if (syllabusSourceType == SyllabusSourceType.Customized) {
+            StuContext.getDataBaseHelper(context)
+                    .getWritableDatabase()
+                    .insert("customized_syllabus", null, values);
+        }
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
 
     public void clearAllData(Context context) {
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("base_user_info", null, new String[]{});
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("user_info", null, new String[]{});
-        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("yiban_table", null, new String[]{});
+        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("official_syllabus", null, new String[]{});
         StuContext.getDataBaseHelper(context).close();
     }
 }
