@@ -1,7 +1,6 @@
 package com.stu.syllabuskt.syllabus
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,6 +20,7 @@ import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.syllabus.ext.SetWeekAdapter
 import com.stu.syllabuskt.syllabus.ext.SetWeekFragment
+import com.stu.syllabuskt.widget.CtlScrollViewPager
 
 class SyllabusContainerFragment : BaseFragment() {
 
@@ -32,7 +33,7 @@ class SyllabusContainerFragment : BaseFragment() {
     private lateinit var menuIV: ImageView
     private lateinit var titleTV: TextView
     private lateinit var refreshLayout: SwipeRefreshLayout
-    private lateinit var syllabusContainer: ViewPager
+    private lateinit var syllabusContainer: CtlScrollViewPager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,7 +111,7 @@ class SyllabusContainerFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_LESSON_CODE && data?.getStringExtra("hadAddNewLesson") == "hadAddNewLesson") {
-            newInstance()
+            // TODO: 2020/12/16 主动刷新
         }
     }
 

@@ -10,7 +10,7 @@ class OAListPresenter(val mView: OAListContract.view, mContext: Context) : OALis
 
     private val oaModel = OAListModel(mContext)
 
-    override fun loadOAList(pageIndex: Int) {
+    override fun loadOAList(pageIndex: Int, refreshListener: RefreshListener?) {
         mView.showLoading()
         oaModel.getOAList(pageIndex, object : OAListModel.OAModelListener {
             override fun onProgress() {
@@ -19,11 +19,18 @@ class OAListPresenter(val mView: OAListContract.view, mContext: Context) : OALis
 
             override fun onSuccess(oaList: List<OABean>?) {
                 mView.setPagerAdapter(oaList)
+                refreshListener?.onSuccess()
             }
 
             override fun onFailure(msg: String) {
                 mView.showErrMsg(msg)
+                refreshListener?.onFailure()
             }
         })
+    }
+
+    interface RefreshListener {
+        fun onSuccess()
+        fun onFailure()
     }
 }

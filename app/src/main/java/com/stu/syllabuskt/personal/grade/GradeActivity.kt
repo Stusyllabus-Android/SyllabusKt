@@ -1,13 +1,23 @@
 package com.stu.syllabuskt.personal.grade
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.stu.syllabuskt.R
+import com.stu.syllabuskt.base.BaseActivity
 
-class GradeActivity : AppCompatActivity() {
+class GradeActivity() : BaseActivity(), IGradeContract.IView {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_grade)
+    private lateinit var presenter: IGradeContract.IPresenter
+
+    override fun getContentView(): Int {
+        return R.layout.activity_grade
+    }
+
+    override fun init() {
+        super.init()
+        presenter = GradePresenter(this, this)
+        presenter.getGrade()
+    }
+
+    override fun setGradeDateAndShow() {
+
     }
 }

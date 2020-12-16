@@ -22,9 +22,8 @@ class OAContainerFragment : BaseFragment() {
     private var currentPageIndex: Int = 1
 
     lateinit var loadingDialog: LoadingDialog
-    lateinit var oaRefreshLayout: SwipeRefreshLayout
     lateinit var oaListViewPager: ViewPager
-    lateinit var oaSearchFAB: FloatingActionButton
+//    lateinit var oaSearchFAB: FloatingActionButton
 
     lateinit var titleTextView: TextView
 
@@ -35,9 +34,8 @@ class OAContainerFragment : BaseFragment() {
         loadingDialog = LoadingDialog(context!!, null)
         return inflater.inflate(R.layout.fragment_oa, container, false).apply {
             titleTextView = findViewById<TextView>(R.id.titleBarTV).apply { text = "第 $currentPageIndex 页" }
-            oaRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.oaRefreshLayout).apply { isEnabled = false }
             oaListViewPager = findViewById<ViewPager>(R.id.oaListVP).apply { offscreenPageLimit = 2 }
-            oaSearchFAB = findViewById(R.id.oaSearchFAB)
+//            oaSearchFAB = findViewById(R.id.oaSearchFAB)
             onInitView()
             onInitEvent()
         }
@@ -48,9 +46,6 @@ class OAContainerFragment : BaseFragment() {
     }
 
     private fun onInitEvent() {
-        oaRefreshLayout.setOnRefreshListener {
-            OAListFragment.newInstance(currentPageIndex)
-        }
         oaListViewPager.apply {
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
@@ -72,7 +67,7 @@ class OAContainerFragment : BaseFragment() {
                 }
             })
         }
-        oaSearchFAB.setOnClickListener{}
+//        oaSearchFAB.setOnClickListener{}
     }
 
     companion object {

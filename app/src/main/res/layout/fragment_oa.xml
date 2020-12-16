@@ -4,29 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar"
+        android:id="@+id/include"/>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/oaRefreshLayout"
-        android:layout_below="@+id/titleBarLayout"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/oaListVP"
+        android:layout_below="@+id/include"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/oaListVP"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/oaSearchFAB"
-        android:backgroundTint="?attr/colorPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:contentDescription="OASearchFloatActionButton"
-        android:layout_alignParentRight="true" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/oaSearchFAB"-->
+<!--        android:backgroundTint="?attr/colorPrimary"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:contentDescription="OASearchFloatActionButton"-->
+<!--        android:layout_alignParentRight="true" />-->
 
 </RelativeLayout>
