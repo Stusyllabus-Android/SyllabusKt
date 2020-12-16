@@ -5,9 +5,9 @@ package com.stu.syllabuskt.personal.grade
  */
 interface IGradeContract {
     interface IView {
-        fun setGradeDateAndShow()
+        fun setGradeDateAndShow(gradeArr: ArrayList<Grade>)
     }
     interface IPresenter {
-        fun getGrade()
+        fun getGrade(refreshListener: GradePresenter.RefreshListener?)
     }
 }

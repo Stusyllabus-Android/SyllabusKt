@@ -10,18 +10,24 @@ class GradePresenter(val mContext: Context, val mView: IGradeContract.IView): IG
 
     private val mGradeModel: GradeModel = GradeModel(mContext)
 
-    override fun getGrade() {
+    override fun getGrade(refreshListener: RefreshListener?) {
         mGradeModel.getGradeDataFromNet(
             StuContext.getDBService().getUserAccount(mContext),
             StuContext.getDBService().getUserPassword(mContext),
             object : GradeModel.GetGradeListener {
                 override fun onFailure(msg: String) {
-
+                    refreshListener?.onFailure()
                 }
 
-                override fun onSuccess() {
-                    mView.setGradeDateAndShow()
+                override fun onSuccess(gradeArr: ArrayList<Grade>) {
+                    mView.setGradeDateAndShow(gradeArr)
+                    refreshListener?.onSuccess()
                 }
             })
+    }
+
+    interface RefreshListener {
+        fun onFailure()
+        fun onSuccess()
     }
 }
