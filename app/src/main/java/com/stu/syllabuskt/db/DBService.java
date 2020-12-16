@@ -145,6 +145,10 @@ public class DBService {
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
 
+    public void clearOfficialSyllabusData(Context context) {
+        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("official_syllabus", null, new String[]{});
+    }
+
     public void clearAllData(Context context) {
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("base_user_info", null, new String[]{});
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("official_syllabus", null, new String[]{});

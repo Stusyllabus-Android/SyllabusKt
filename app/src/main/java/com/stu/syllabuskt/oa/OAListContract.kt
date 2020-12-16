@@ -14,6 +14,6 @@ interface OAListContract {
     }
 
     interface presenter {
-        fun loadOAList(pageIndex: Int)
+        fun loadOAList(pageIndex: Int, refreshListener: OAListPresenter.RefreshListener?)
     }
 }

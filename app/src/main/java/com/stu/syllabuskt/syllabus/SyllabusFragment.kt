@@ -12,12 +12,17 @@ import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.ColorUtils
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.balysv.materialripple.MaterialRippleLayout
 import com.stu.syllabuskt.R
+import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.bean.Lesson
+import com.stu.syllabuskt.login.Target
+import com.stu.syllabuskt.login.YBBusinessModel
 import com.stu.syllabuskt.utils.ColorUtil
 import com.stu.syllabuskt.utils.ToastUtil
+import kotlinx.android.synthetic.main.fragment_syllabus.*
 
 private const val POSITION_PARAM = "position_param"
 
@@ -28,6 +33,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     private var selectedWeek: Int? = null
     private var weekIndex: Int = 0
     private lateinit var syllabusPresenter: SyllabusPresenter
+    private lateinit var mRefreshLayout: SwipeRefreshLayout
     private lateinit var mDateLinearLayout: LinearLayout
     private lateinit var mTimeLinearLayout: LinearLayout
     private lateinit var gridLayout: GridLayout
@@ -35,6 +41,8 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     private var gridWidth: Int = 0
     private var gridHeight: Int = 0
     private var timeWidth: Int = 0
+
+    private lateinit var ybBusinessModel: YBBusinessModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +61,16 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
             gridHeight = it.height / 12
             timeWidth = it.width - gridWidth * 7
         }
-        syllabusPresenter = SyllabusPresenter(context!!, this)
+        syllabusPresenter = SyllabusPresenter(context!!, this, object : SyllabusPresenter.IOListener {
+            override fun onFinish(lessonList: List<Lesson>) {
+                runOnUiThread {
+                    showSyllabus(lessonList)
+                }
+            }
+        })
+        ybBusinessModel = YBBusinessModel(context!!, Target.Syllabus)
         return inflater.inflate(R.layout.fragment_syllabus, container, false).apply {
+            mRefreshLayout = findViewById(R.id.refreshSyllabusLayout)
             mDateLinearLayout = findViewById(R.id.dateLinearLayout)
             mTimeLinearLayout = findViewById(R.id.timeLinearLayout)
             gridLayout = findViewById<GridLayout>(R.id.gridLayout).apply {
@@ -65,6 +81,31 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
             showTime()
             initGridLayout()
             syllabusPresenter.init()
+            initEvent()
+        }
+    }
+
+    private fun initEvent() {
+        mRefreshLayout.setOnRefreshListener {
+            ybBusinessModel.login(
+                StuContext.getDBService().getUserAccount(context!!),
+                StuContext.getDBService().getUserPassword(context!!),
+                object : YBBusinessModel.YBBusinessListener {
+                    override fun onProgress() {
+                        refreshSyllabusLayout.isRefreshing = true
+                    }
+
+                    override fun onSuccess() {
+                        refreshSyllabusLayout.isRefreshing = false
+                        syllabusPresenter.init()
+                        ToastUtil.showShort(context!!, "刷新成功")
+                    }
+
+                    override fun onFailure(msg: String) {
+                        refreshSyllabusLayout.isRefreshing = false
+                        ToastUtil.showShort(context!!, msg)
+                    }
+                })
         }
     }
 
