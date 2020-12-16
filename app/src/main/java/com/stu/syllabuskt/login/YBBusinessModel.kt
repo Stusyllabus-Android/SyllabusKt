@@ -23,7 +23,7 @@ import java.net.URLEncoder
  *yuan
  *2020/9/4
  **/
-class LoginModel(private val mContext: Context) {
+class YBBusinessModel(private val mContext: Context, private val target: Target) {
 
     private val TAG = "LoginModel"
 
@@ -32,18 +32,18 @@ class LoginModel(private val mContext: Context) {
     private val yiBanApi: YiBanApi = RetrofitProvider.getYiBanRetrofit(mContext).create(YiBanApi::class.java)
     private val officialAccountApi: OfficialAccountApi = RetrofitProvider.getOfficialWCRetrofit(mContext).create(OfficialAccountApi::class.java)
 
-    fun login(account: String, password: String, loginListener: LoginListener) {
+    fun login(account: String, password: String, ybBusinessListener: YBBusinessListener) {
         if (!verify(account, password)) {
-            loginListener.onFailure(mContext.resources.getString(R.string.login_info_invalid))
+            ybBusinessListener.onFailure(mContext.resources.getString(R.string.login_info_invalid))
             return
         }
         GlobalScope.launch {
-            loginListener.onProgress()
+            ybBusinessListener.onProgress()
             yiBanApi.requestToken
                 .enqueue(object : retrofit2.Callback<String> {
 
                     override fun onFailure(call: retrofit2.Call<String>, t: Throwable) {
-                        loginWithWCOfficialAccountApi(account, password, loginListener)
+                        loginWithWCOfficialAccountApi(account, password, ybBusinessListener)
                         Log.e(TAG, t.message ?: "")
                     }
 
@@ -79,19 +79,20 @@ class LoginModel(private val mContext: Context) {
                                                     call: Call<YiBanTimeTable>,
                                                     response: Response<YiBanTimeTable>
                                                 ) {
+                                                    if (target == Target.Syllabus) StuContext.getDBService().clearOfficialSyllabusData(mContext)
+                                                    else StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
                                                     StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
                                                     response.body()?.table?.forEach { it ->
                                                         StuContext.getDBService().writeSyllabus(mContext, account, it, SyllabusSourceType.Official)
                                                     }
-                                                    StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
-                                                    loginListener.onSuccess()
+                                                    ybBusinessListener.onSuccess()
                                                 }
 
                                                 override fun onFailure(
                                                     call: Call<YiBanTimeTable>,
                                                     t: Throwable
                                                 ) {
-                                                    loginWithWCOfficialAccountApi(account, password, loginListener)
+                                                    loginWithWCOfficialAccountApi(account, password, ybBusinessListener)
                                                 }
                                             })
                                         }
@@ -101,14 +102,14 @@ class LoginModel(private val mContext: Context) {
                                             t: Throwable
                                         ) {
                                             Log.e(TAG, t.message ?: "")
-                                            loginWithWCOfficialAccountApi(account, password, loginListener)
+                                            loginWithWCOfficialAccountApi(account, password, ybBusinessListener)
                                         }
                                     })
                                 }
 
                                 override fun onFailure(call: Call<String>, t: Throwable) {
                                     Log.e(TAG, t.message ?: "")
-                                    loginWithWCOfficialAccountApi(account, password, loginListener)
+                                    loginWithWCOfficialAccountApi(account, password, ybBusinessListener)
                                 }
                             })
                     }
@@ -120,17 +121,23 @@ class LoginModel(private val mContext: Context) {
     /**
      * 兜底策略：使用另一数据接口实现登录
      */
-    private fun loginWithWCOfficialAccountApi(account: String, password: String, loginListener: LoginListener) {
+    private fun loginWithWCOfficialAccountApi(account: String, password: String, loginListener: YBBusinessListener) {
         officialAccountApi.login(account, password, "登录", "", "")
             .enqueue(object : retrofit2.Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
-                    StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
+                    if (target == Target.Login) {
+                        StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
+                        StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
+                    }
                     loginListener.onSuccess()
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    loginListener.onFailure("账号密码错误或网络状态出错")
+                    if (target == Target.Login) {
+                        loginListener.onFailure("账号密码错误或网络状态出错")
+                    } else {
+                        loginListener.onFailure("网络状态出错，请稍后重试")
+                    }
                 }
             })
     }
@@ -172,9 +179,14 @@ class LoginModel(private val mContext: Context) {
 //        return token
 //    }
 
-    interface LoginListener {
+    interface YBBusinessListener {
         fun onProgress()
         fun onSuccess()
         fun onFailure(msg: String)
     }
+}
+
+enum class Target {
+    Login,
+    Syllabus
 }

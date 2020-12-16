@@ -8,10 +8,10 @@ import android.content.Context
  **/
 class LoginPresenter(val view: LoginContract.view, mContext: Context): LoginContract.presenter {
 
-    var model: LoginModel = LoginModel(mContext)
+    var model: YBBusinessModel = YBBusinessModel(mContext, Target.Login)
 
     override fun login(account: String, password: String) {
-        model.login(account, password, object : LoginModel.LoginListener {
+        model.login(account, password, object : YBBusinessModel.YBBusinessListener {
             override fun onProgress() {
                 view.showLoading()
             }

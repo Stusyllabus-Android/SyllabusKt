@@ -8,7 +8,7 @@
 
     <include layout="@layout/title_bar"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <com.stu.syllabuskt.widget.CtlScrollViewPager
         android:id="@+id/syllabusContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
