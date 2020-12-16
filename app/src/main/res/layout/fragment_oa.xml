@@ -4,19 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/title_bar"/>
+    <include layout="@layout/title_bar"
+        android:id="@+id/include"/>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/oaRefreshLayout"
-        android:layout_below="@+id/titleBarLayout"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/oaListVP"
+        android:layout_below="@+id/include"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/oaListVP"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"/>
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/oaSearchFAB"-->

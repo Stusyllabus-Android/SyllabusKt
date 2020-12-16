@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.bean.OABean
@@ -20,6 +21,7 @@ class OAListFragment : BaseFragment(), OAListContract.view {
 
     private var position: Int? = null
 
+    private lateinit var oaRefreshLayout: SwipeRefreshLayout
     private lateinit var oaListContainer: RecyclerView
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var oaListPresenter: OAListPresenter
@@ -38,9 +40,27 @@ class OAListFragment : BaseFragment(), OAListContract.view {
         loadingDialog = LoadingDialog(context!!, null)
         oaListPresenter = OAListPresenter(this, context!!)
         return inflater.inflate(R.layout.fragment_oa_list, container, false).apply {
+            oaRefreshLayout = findViewById<SwipeRefreshLayout>(R.id.oaRefreshLayout)
             oaListContainer = findViewById(R.id.oaListContainer)
             oaListContainer.layoutManager = LinearLayoutManager(context!!)
-            oaListPresenter.loadOAList(position ?: 1)
+            oaListPresenter.loadOAList(position ?: 1, null)
+            initEvent()
+        }
+    }
+
+    private fun initEvent() {
+        oaRefreshLayout.setOnRefreshListener {
+            oaListPresenter.loadOAList(position ?: 1, object : OAListPresenter.RefreshListener {
+                override fun onSuccess() {
+                    ToastUtil.showShort(context!!, "刷新成功")
+                    oaRefreshLayout.isRefreshing = false
+                }
+
+                override fun onFailure() {
+                    ToastUtil.showShort(context!!, "刷新失败")
+                    oaRefreshLayout.isRefreshing = false
+                }
+            })
         }
     }
 
