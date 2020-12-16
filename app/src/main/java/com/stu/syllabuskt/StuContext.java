@@ -1,6 +1,7 @@
 package com.stu.syllabuskt;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.stu.syllabuskt.db.DBService;
 import com.stu.syllabuskt.db.DataBaseHelper;
@@ -12,10 +13,13 @@ import com.stu.syllabuskt.db.DataBaseHelper;
  **/
 public final class StuContext {
 
+    private final static String SYLLABUS_SQLite_NAME = "syllabus_database";
+    private final static String SYLLABUS_SP_NAME = "syllabus_sp";
+
     private final static SingleTon<DataBaseHelper, Context> mDataBaseHelper = new SingleTon<DataBaseHelper, Context>() {
         @Override
         protected DataBaseHelper create(Context context) {
-            return new DataBaseHelper(context, "syllabus_database", null, 1);
+            return new DataBaseHelper(context, SYLLABUS_SQLite_NAME, null, 1);
         }
     };
 
@@ -32,5 +36,16 @@ public final class StuContext {
 
     public static DBService getDBService() {
         return mDBService.get(null);
+    }
+
+    private final static SingleTon<SharedPreferences, Context> mSharePreferences = new SingleTon<SharedPreferences, Context>() {
+        @Override
+        protected SharedPreferences create(Context context) {
+            return context.getSharedPreferences(SYLLABUS_SP_NAME, Context.MODE_PRIVATE);
+        }
+    };
+
+    public static SharedPreferences getSharePreferences(Context context) {
+        return mSharePreferences.get(context);
     }
 }

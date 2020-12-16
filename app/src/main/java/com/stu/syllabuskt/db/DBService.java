@@ -42,22 +42,6 @@ public class DBService {
         return password == null ? "" : password;
     }
 
-    public String getSemester(Context context) {
-        String semester = null;
-        String sql = "select * from user_info";
-        Cursor cursor = StuContext.getDataBaseHelper(context).getReadableDatabase()
-                .rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            semester = cursor.getString(cursor.getColumnIndex("semester"));
-        }
-        cursor.close();
-        StuContext.getDataBaseHelper(context).getReadableDatabase().close();
-        if (semester == null) {
-            semester = "Non-existent";
-        }
-        return semester;
-    }
-
     public List<YiBanTimeTable.TableBean> getSyllabus(Context context) {
         List<YiBanTimeTable.TableBean> tableBeanList = new LinkedList<>();
         String account = null;
@@ -140,20 +124,6 @@ public class DBService {
         StuContext.getDataBaseHelper(context).getWritableDatabase().close();
     }
 
-    public void writeSemester(Context context, String semester) {
-        ContentValues values = new ContentValues();
-        values.put("semester", semester);
-        StuContext.getDataBaseHelper(context).getWritableDatabase().insert("user_info", null, values);
-        StuContext.getDataBaseHelper(context).close();
-    }
-
-    public void updateSemester(Context context, String semester) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("semester", semester);
-        StuContext.getDataBaseHelper(context).getWritableDatabase().update("user_info", contentValues, null, null);
-        StuContext.getDataBaseHelper(context).close();
-    }
-
     public void writeSyllabus(Context context, String account, YiBanTimeTable.TableBean tableBean, SyllabusSourceType syllabusSourceType) {
         ContentValues values = new ContentValues();
         values.put("account", account);
@@ -177,7 +147,6 @@ public class DBService {
 
     public void clearAllData(Context context) {
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("base_user_info", null, new String[]{});
-        StuContext.getDataBaseHelper(context).getWritableDatabase().delete("user_info", null, new String[]{});
         StuContext.getDataBaseHelper(context).getWritableDatabase().delete("official_syllabus", null, new String[]{});
         StuContext.getDataBaseHelper(context).close();
     }

@@ -15,6 +15,7 @@ import com.stu.syllabuskt.main.MainActivity
 import com.stu.syllabuskt.personal.theme.ThemePickerAdapter
 import com.stu.syllabuskt.personal.theme.ThemePickerFragment
 import com.stu.syllabuskt.personal.theme.ThemeUtil
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 import kotlin.collections.ArrayList
 
 /**
@@ -30,7 +31,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     lateinit var changeSemesterLayout: RelativeLayout
     lateinit var changeThemeLayout: RelativeLayout
     lateinit var schoolSmartCardLayout: RelativeLayout
-    lateinit var examinationLayout: RelativeLayout
+//    lateinit var examinationLayout: RelativeLayout
     lateinit var gradeLayout: RelativeLayout
     lateinit var settingLayout: RelativeLayout
     lateinit var currentAccountTV: TextView
@@ -54,11 +55,12 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             currentAccountTV = (it.findViewById(R.id.currentAccountTV) as TextView).apply { text = StuContext.getDBService().getUserAccount(fragment.context) }
             changeSemesterLayout = it.findViewById(R.id.changeSemesterLayout)
             mSemesterTextView = (it.findViewById(R.id.semesterTextView) as  TextView).apply {
-                text = if (StuContext.getDBService().getSemester(fragment.context) == "Non-existent") "未设置当前学期" else StuContext.getDBService().getSemester(fragment.context)
+                val semesterSet = StuContext.getSharePreferences(fragment.context!!).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent")
+                text = if (semesterSet == "Non-existent") "未设置当前学期" else semesterSet
             }
             changeThemeLayout = it.findViewById(R.id.changeThemeLayout)
             schoolSmartCardLayout = it.findViewById(R.id.smartCardLayout)
-            examinationLayout = it.findViewById(R.id.examinationLayout)
+//            examinationLayout = it.findViewById(R.id.examinationLayout)
             gradeLayout = it.findViewById(R.id.gradeLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
         }
@@ -77,7 +79,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             changeSemesterLayout.setOnClickListener(it)
             changeThemeLayout.setOnClickListener(it)
             schoolSmartCardLayout.setOnClickListener(it)
-            examinationLayout.setOnClickListener(it)
+//            examinationLayout.setOnClickListener(it)
             gradeLayout.setOnClickListener(it)
             settingLayout.setOnClickListener(it)
 
@@ -89,7 +91,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             R.id.changeSemesterLayout -> showSemesterSelect()
             R.id.changeThemeLayout -> showThemePickView()
             R.id.smartCardLayout -> startCardView()
-            R.id.examinationLayout -> startExamView()
+//            R.id.examinationLayout -> startExamView()
             R.id.gradeLayout -> startGradeView()
             R.id.settingLayout -> startSetting()
         }
@@ -101,7 +103,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             OptionsPickerBuilder(fragment.context!!) { i, i1, i2, view ->
                 mSemesterTextView.text = "${years[i]} ${semester[i2]}"
                 Log.d(TAG, "onOptionsSelect: ${years[i]} ${semester[i2]}")
-                StuContext.getDBService().updateSemester(fragment.context, "${years[i]} ${semester[i2]}")
+                StuContext.getSharePreferences(fragment.context!!).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "${years[i]} ${semester[i2]}").apply()
             }.setTitleText("选择学期")
                 .setContentTextSize(18)
                 .setDividerColor(Color.GRAY)

@@ -4,6 +4,7 @@ import android.content.Context
 import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.bean.YiBanTimeTable
 import com.stu.syllabuskt.db.SyllabusSourceType
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 
 /**
  * Create by yuan on 2020/12/14
@@ -24,7 +25,7 @@ class AddLessonModel(val context: Context) : AddLessonContract.IModel {
         weekSelected: String,
         detail: String
     ) {
-        val tableBean = YiBanTimeTable.TableBean(StuContext.getDBService().getSemester(context), System.currentTimeMillis().toInt(), lessonName, "", classroom, "第${weekSelected}周，${detail.split(" ")[0]}(${generateNodeStr(detail.split(" ")[1])}节)")
+        val tableBean = YiBanTimeTable.TableBean(StuContext.getSharePreferences(context).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent"), System.currentTimeMillis().toInt(), lessonName, "", classroom, "第${weekSelected}周，${detail.split(" ")[0]}(${generateNodeStr(detail.split(" ")[1])}节)")
         StuContext.getDBService().writeSyllabus(context, StuContext.getDBService().getUserAccount(context), tableBean, SyllabusSourceType.Customized)
     }
 

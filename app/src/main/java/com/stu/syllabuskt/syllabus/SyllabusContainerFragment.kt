@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.stu.syllabuskt.R
+import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.syllabus.ext.SetWeekAdapter
 import com.stu.syllabuskt.syllabus.ext.SetWeekFragment
@@ -85,6 +86,11 @@ class SyllabusContainerFragment : BaseFragment() {
                 Log.i(TAG, "onPageScrollStateChanged() >>> $state")
             }
         })
+        val setWeek = StuContext.getSharePreferences(context!!).getInt(SetWeekKey, -1)
+        if (setWeek != -1) {
+            syllabusContainer.currentItem = StuContext.getSharePreferences(context!!).getInt(SetWeekKey, -1)
+            Log.i(TAG, "current week has set, is ${setWeek + 1}")
+        }
     }
 
     private fun setCurWeek() {
@@ -92,7 +98,7 @@ class SyllabusContainerFragment : BaseFragment() {
             setOnItemClickListener(object : SetWeekAdapter.OnItemClickListener {
                 override fun onItemClickListener(position: Int) {
                     syllabusContainer.currentItem = position
-                    // TODO: 2020/12/14 储存当前时间与当前周，每次fragment初始化时计算得出准确是第几周 
+                    StuContext.getSharePreferences(context!!).edit().putInt(SetWeekKey, position).apply()
                     Log.i(TAG, "onItemClickListener() >> position is $position")
                     dismiss()
                 }
@@ -113,5 +119,7 @@ class SyllabusContainerFragment : BaseFragment() {
         fun newInstance() = SyllabusContainerFragment()
 
         const val ADD_LESSON_CODE = 1
+        const val SetWeekKey = "SetWeekKey"
+        const val CurrentSemesterKey = "CurrentSemester"
     }
 }
