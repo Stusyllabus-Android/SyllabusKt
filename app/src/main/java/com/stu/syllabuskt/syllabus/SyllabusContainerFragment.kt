@@ -20,6 +20,7 @@ import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseFragment
 import com.stu.syllabuskt.syllabus.ext.SetWeekAdapter
 import com.stu.syllabuskt.syllabus.ext.SetWeekFragment
+import com.stu.syllabuskt.utils.ToastUtil
 import com.stu.syllabuskt.widget.CtlScrollViewPager
 
 class SyllabusContainerFragment : BaseFragment() {
@@ -111,7 +112,7 @@ class SyllabusContainerFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_LESSON_CODE && data?.getStringExtra("hadAddNewLesson") == "hadAddNewLesson") {
-            // TODO: 2020/12/16 主动刷新
+            ToastUtil.showShort(context, "刷新可展示最新课程数据")
         }
     }
 

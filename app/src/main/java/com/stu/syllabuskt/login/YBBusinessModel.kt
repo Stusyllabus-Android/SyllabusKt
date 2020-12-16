@@ -79,13 +79,15 @@ class YBBusinessModel(private val mContext: Context, private val target: Target)
                                                     call: Call<YiBanTimeTable>,
                                                     response: Response<YiBanTimeTable>
                                                 ) {
-                                                    if (target == Target.Syllabus) StuContext.getDBService().clearOfficialSyllabusData(mContext)
-                                                    else StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
-                                                    StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
-                                                    response.body()?.table?.forEach { it ->
-                                                        StuContext.getDBService().writeSyllabus(mContext, account, it, SyllabusSourceType.Official)
-                                                    }
-                                                    ybBusinessListener.onSuccess()
+                                                    Thread() {
+                                                        if (target == Target.Syllabus) StuContext.getDBService().clearOfficialSyllabusData(mContext)
+                                                        else StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
+                                                        StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
+                                                        response.body()?.table?.forEach { it ->
+                                                            StuContext.getDBService().writeSyllabus(mContext, account, it, SyllabusSourceType.Official)
+                                                        }
+                                                        ybBusinessListener.onSuccess()
+                                                    }.run()
                                                 }
 
                                                 override fun onFailure(

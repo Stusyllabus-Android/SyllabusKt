@@ -61,7 +61,13 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
             gridHeight = it.height / 12
             timeWidth = it.width - gridWidth * 7
         }
-        syllabusPresenter = SyllabusPresenter(context!!, this)
+        syllabusPresenter = SyllabusPresenter(context!!, this, object : SyllabusPresenter.IOListener {
+            override fun onFinish(lessonList: List<Lesson>) {
+                runOnUiThread {
+                    showSyllabus(lessonList)
+                }
+            }
+        })
         ybBusinessModel = YBBusinessModel(context!!, Target.Syllabus)
         return inflater.inflate(R.layout.fragment_syllabus, container, false).apply {
             mRefreshLayout = findViewById(R.id.refreshSyllabusLayout)
@@ -81,22 +87,25 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
 
     private fun initEvent() {
         mRefreshLayout.setOnRefreshListener {
-            ybBusinessModel.login(StuContext.getDBService().getUserAccount(context!!), StuContext.getDBService().getUserPassword(context!!), object : YBBusinessModel.YBBusinessListener {
-                override fun onProgress() {
-                    refreshSyllabusLayout.isRefreshing = true
-                }
+            ybBusinessModel.login(
+                StuContext.getDBService().getUserAccount(context!!),
+                StuContext.getDBService().getUserPassword(context!!),
+                object : YBBusinessModel.YBBusinessListener {
+                    override fun onProgress() {
+                        refreshSyllabusLayout.isRefreshing = true
+                    }
 
-                override fun onSuccess() {
-                    refreshSyllabusLayout.isRefreshing = false
-                    syllabusPresenter.init()
-                    ToastUtil.showShort(context!!, "刷新成功")
-                }
+                    override fun onSuccess() {
+                        refreshSyllabusLayout.isRefreshing = false
+                        syllabusPresenter.init()
+                        ToastUtil.showShort(context!!, "刷新成功")
+                    }
 
-                override fun onFailure(msg: String) {
-                    refreshSyllabusLayout.isRefreshing = false
-                    ToastUtil.showShort(context!!, msg)
-                }
-            })
+                    override fun onFailure(msg: String) {
+                        refreshSyllabusLayout.isRefreshing = false
+                        ToastUtil.showShort(context!!, msg)
+                    }
+                })
         }
     }
 

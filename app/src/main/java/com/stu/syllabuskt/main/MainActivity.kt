@@ -29,6 +29,7 @@ class MainActivity : BaseActivity() {
             add(PersonalFragment.newInstance())
         }
         mainViewPager.adapter = MainPagerAdapter(supportFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragmentList)
+        mainViewPager.offscreenPageLimit = 2
     }
 
     override fun getContentView(): Int {

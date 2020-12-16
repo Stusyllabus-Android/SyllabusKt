@@ -6,9 +6,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.stu.syllabuskt.R
+import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseActivity
 import com.stu.syllabuskt.bean.Lesson
 import com.stu.syllabuskt.bean.YiBanTimeTable
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 import com.stu.syllabuskt.widget.TipDialog
 
 class DeleteLessonActivity : BaseActivity() {
@@ -36,7 +38,14 @@ class DeleteLessonActivity : BaseActivity() {
             }
         }
         lessonRecyclerView = findViewById(R.id.lessonRecyclerView)
-        localCustomLesson = deleteLessonModel.getCustomizedSyllabus()
+        localCustomLesson = ArrayList<YiBanTimeTable.TableBean?>()
+        deleteLessonModel.getCustomizedSyllabus()?.forEach {
+            if (StuContext.getSharePreferences(this).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent")?.substring(0, 9)
+                    ?.let { it1 -> it?.xnxqName?.contains(it1) } == true
+            ) {
+                localCustomLesson?.add(it)
+            }
+        }
         adapter = LessonAdapter(this, localCustomLesson).apply {
             setOnDeleteIconClickListener(object : LessonAdapter.OnDeleteIconClickListener {
                 override fun onDeleteIconClickListener(position: Int) {
