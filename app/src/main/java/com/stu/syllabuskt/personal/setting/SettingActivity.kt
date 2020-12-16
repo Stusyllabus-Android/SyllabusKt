@@ -24,6 +24,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun logout() {
+        StuContext.getSharePreferences(this).edit().clear().apply()
         StuContext.getDBService().clearAllData(this)
         setResult(1000, Intent().putExtra("finishMainActivity", "finishMainActivity"))
         finish()

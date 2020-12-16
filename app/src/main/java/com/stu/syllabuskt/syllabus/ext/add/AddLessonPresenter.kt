@@ -2,6 +2,7 @@ package com.stu.syllabuskt.syllabus.ext.add
 
 import android.content.Context
 import com.stu.syllabuskt.StuContext
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 
 /**
  * Create by yuan on 2020/12/14
@@ -16,7 +17,7 @@ class AddLessonPresenter(val context: Context, val view: AddLessonContract.IView
         weekSelected: String,
         detail: String
     ) {
-        if (StuContext.getDBService().getSemester(context).isNullOrEmpty()) {
+        if (StuContext.getSharePreferences(context).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent") == "Non-existent") {
             view.showErrorMSG("请先到个人主页设置当前学年学期~")
         } else {
             model.addLesson(lessonName, classroom, weekSelected, detail)

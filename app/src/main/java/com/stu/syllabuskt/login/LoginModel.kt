@@ -9,6 +9,7 @@ import com.stu.syllabuskt.api.YiBanApi
 import com.stu.syllabuskt.bean.YiBanTimeTable
 import com.stu.syllabuskt.bean.YiBanToken
 import com.stu.syllabuskt.db.SyllabusSourceType
+import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
@@ -87,7 +88,7 @@ class LoginModel(private val mContext: Context) {
                                                     response.body()?.table?.forEach { it ->
                                                         StuContext.getDBService().writeSyllabus(mContext, account, it, SyllabusSourceType.Official)
                                                     }
-                                                    StuContext.getDBService().writeSemester(mContext, "Non-existent")
+                                                    StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
                                                     loginListener.onSuccess()
                                                 }
 
