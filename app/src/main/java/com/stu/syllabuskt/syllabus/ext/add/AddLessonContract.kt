@@ -7,7 +7,7 @@ interface AddLessonContract {
 
     interface IView {
 
-        fun chooseWeek(): String
+        fun chooseWeek()
 
         fun chooseDetail()
 
