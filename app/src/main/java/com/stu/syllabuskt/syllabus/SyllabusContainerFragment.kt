@@ -111,7 +111,7 @@ class SyllabusContainerFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_LESSON_CODE && data?.getStringExtra("hadAddNewLesson") == "hadAddNewLesson") {
-            // TODO: 2020/12/16 主动刷新 
+            // TODO: 2020/12/16 主动刷新
         }
     }
 
