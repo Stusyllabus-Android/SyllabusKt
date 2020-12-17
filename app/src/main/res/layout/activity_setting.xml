@@ -12,9 +12,7 @@
     <RelativeLayout
         android:id="@+id/helpAndFeedback"
         android:layout_below="@+id/include"
-        android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -34,11 +32,18 @@
             android:contentDescription="@string/help_feedback" />
     </RelativeLayout>
 
+    <View
+        android:id="@+id/divLine1"
+        android:layout_below="@id/helpAndFeedback"
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
     <RelativeLayout
         android:id="@+id/share2"
-        android:layout_below="@+id/helpAndFeedback"
+        android:layout_below="@+id/divLine1"
         android:padding="10dp"
-        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -59,12 +64,19 @@
             android:contentDescription="@string/share_app" />
     </RelativeLayout>
 
+    <View
+        android:id="@+id/divLine2"
+        android:layout_below="@id/share2"
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
     <RelativeLayout
         android:id="@+id/aboutUs"
-        android:layout_below="@id/share2"
+        android:layout_below="@id/divLine2"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
-        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -95,11 +107,18 @@
             android:contentDescription="@string/about_us" />
     </RelativeLayout>
 
+    <View
+        android:id="@+id/divLine3"
+        android:layout_below="@id/aboutUs"
+        android:background="#EBEDF0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="8dp"/>
+
     <RelativeLayout
         android:id="@+id/logout"
-        android:layout_below="@id/aboutUs"
+        android:layout_below="@id/divLine3"
         android:padding="10dp"
-        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
