@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/semesterTitleContainer"
-    android:background="@drawable/bg_grade_semester"
+    android:background="@drawable/bg_grade_title_only_title"
     android:paddingVertical="20dp"
     android:gravity="center_vertical"
     android:orientation="horizontal" android:layout_width="match_parent"

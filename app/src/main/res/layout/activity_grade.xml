@@ -23,93 +23,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer1"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer2"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer3"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer4"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer5"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer6"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer7"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer8"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer9"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.stu.syllabuskt.widget.GradeItemRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gradeContainer10"
                     android:visibility="gone"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_margin="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
