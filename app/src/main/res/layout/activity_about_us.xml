@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about_us"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/material_grey_100"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar"/>
+
+    <RelativeLayout
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/syllabusIconView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/logo"/>
+
+        <TextView
+            android:id="@+id/syllabusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/syllabusIconView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_name"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/descTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/syllabusTextView"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="13dp"
+            android:background="@color/defaultDarkBackground"
+            android:gravity="left"
+            android:paddingBottom="8dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="8dp"
+            android:text="　　汕学派是由汕头大学计算机系部分学生共同开发的一个校园App，主要有查询课表、成绩、OA、一卡通流水等功能。"
+            android:textColor="@color/defaultTextColor"/>
+
+        <TextView
+            android:id="@+id/findUsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="合作联系"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/callTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/findUsTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="8dp"
+            android:text="包永祥\n电话：16607612778\n邮箱：18yxbao@stu.edu.cn"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
