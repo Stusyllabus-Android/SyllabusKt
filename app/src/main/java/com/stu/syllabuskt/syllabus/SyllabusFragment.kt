@@ -97,6 +97,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
 
                     override fun onSuccess() {
                         refreshSyllabusLayout.isRefreshing = false
+                        gridLayout.removeAllViews()
                         syllabusPresenter.init()
                         ToastUtil.showShort(context!!, "刷新成功")
                     }

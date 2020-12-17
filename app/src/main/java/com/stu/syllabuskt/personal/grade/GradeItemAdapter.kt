@@ -20,18 +20,23 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
     private var arrowIconClickListener: ArrowIconClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (gradeItemList.size > 0  && gradeItemList[0].itemType == GradeItem.Title) {
+        return if (viewType == GradeItem.Title.ordinal) {
             GradeTitle(LayoutInflater.from(context).inflate(R.layout.item_grade_title, parent, false))
         } else GradeContent(LayoutInflater.from(context).inflate(R.layout.item_grade_content, parent, false))
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return gradeItemList[position].itemType.ordinal
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (gradeItemList[position].itemType == GradeItem.Title) {
-            (holder as GradeTitle).itemView.apply {
+            (holder as GradeTitle).apply {
                 gradeItemList[position].let {
-                    semesterTextView.text = it.firstText
-                    numOfLessons.text = (gradeItemList.size - 1).toString()
-                    expandIcon.setImageResource(R.drawable.icon_arrow_down).also {
+                    semesterTV.text = it.firstText
+                    numOfLessonsTextView.text = "共${(gradeItemList.size - 1)}门课程"
+                    expandIV.apply {
+                        setImageResource(R.drawable.icon_arrow_down)
                         setOnClickListener {
                             arrowIconClickListener?.onClick()
                         }
@@ -39,7 +44,13 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
                 }
             }
         } else if (gradeItemList[position].itemType == GradeItem.Content) {
-
+            (holder as GradeContent).apply {
+                gradeItemList[position].let {
+                    lessonNameTV.text = it.firstText
+                    gradeTV.text = it.secondText
+                    if (position == gradeItemList.size - 1) divLine.visibility = View.GONE
+                }
+            }
         }
     }
 
@@ -51,14 +62,14 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
         this.arrowIconClickListener = arrowIconClickListener
     }
 
-    inner class GradeTitle(itemView: RelativeLayout) : RecyclerView.ViewHolder(itemView) {
-        val semesterTextView: TextView = itemView.findViewById(R.id.semesterTV)
+    inner class GradeTitle(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var semesterTV: TextView = itemView.findViewById(R.id.semesterTV)
         val numOfLessonsTextView: TextView = itemView.findViewById(R.id.numOfLessons)
         val expandIV: ImageView = itemView.findViewById(R.id.expandIcon)
     }
 
-    inner class GradeContent(itemView: RelativeLayout) : RecyclerView.ViewHolder(itemView) {
-        val lessonNameTV: TextView = itemView.findViewById(R.id.lessonTextView)
+    inner class GradeContent(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val lessonNameTV: TextView = itemView.findViewById(R.id.lessonNameTV)
         val gradeTV: TextView = itemView.findViewById(R.id.gradeTV)
         val divLine: View = itemView.findViewById(R.id.divLine)
     }

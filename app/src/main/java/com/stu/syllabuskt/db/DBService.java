@@ -76,7 +76,7 @@ public class DBService {
             ks_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("ksName"));
             sj_name = cursorForCustomizedSyllabus.getString(cursorForCustomizedSyllabus.getColumnIndex("sjName"));
             if (xnxq_name != null && account.equals(StuContext.getDBService().getUserAccount(context))) tableBeanList.add(new YiBanTimeTable.TableBean(xnxq_name, Integer.parseInt(kkb_key), kc_name, js_name, ks_name, sj_name));
-            else break;
+            else continue;
         }
         cursorForCustomizedSyllabus.close();
         StuContext.getDataBaseHelper(context).getReadableDatabase().close();
