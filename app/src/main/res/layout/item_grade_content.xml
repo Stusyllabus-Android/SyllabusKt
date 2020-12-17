@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/semesterTitleContainer"
-    android:layout_marginVertical="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/semesterContentContainer"
+    android:background="@color/defaultDarkBackground"
+    android:paddingVertical="10dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -12,7 +15,7 @@
         android:textSize="18sp"
         android:textColor="@color/material_textBlack_black"
         android:layout_marginLeft="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp" />
 
@@ -34,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginTop="10dp"
         android:background="@color/defaultShowColor"/>
 
 </RelativeLayout>

@@ -127,11 +127,13 @@ class YBBusinessModel(private val mContext: Context, private val target: Target)
         officialAccountApi.login(account, password, "登录", "", "")
             .enqueue(object : retrofit2.Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (target == Target.Login) {
+                    if (target == Target.Login && response.body().toString().contains("成功")) {
                         StuContext.getDBService().writeBaseUserInfo(mContext, account, password)
                         StuContext.getSharePreferences(mContext).edit().putString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent").apply()
+                        loginListener.onSuccess()
+                    } else if (target == Target.Login) {
+                        loginListener.onFailure("账号密码错误或网络状态出错")
                     }
-                    loginListener.onSuccess()
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
