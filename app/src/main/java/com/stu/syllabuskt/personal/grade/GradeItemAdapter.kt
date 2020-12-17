@@ -15,9 +15,16 @@ import kotlinx.android.synthetic.main.item_grade_title.view.*
 /**
  * Create by yuan on 2020/12/16
  */
-class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeItemBean>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GradeItemAdapter(val context: Context, var gradeItemList: ArrayList<GradeItemBean>, val numOfLesson: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var arrowIconClickListener: ArrowIconClickListener? = null
+    private var onlyShowTitleNow = false
+
+    private val titleItem = ArrayList<GradeItemBean>().apply { add(gradeItemList[0]) }
+    private val contentItem = ArrayList<GradeItemBean>().apply {
+        for (i in 1 until gradeItemList.size) {
+            add(gradeItemList[i])
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == GradeItem.Title.ordinal) {
@@ -34,11 +41,21 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
             (holder as GradeTitle).apply {
                 gradeItemList[position].let {
                     semesterTV.text = it.firstText
-                    numOfLessonsTextView.text = "共${(gradeItemList.size - 1)}门课程"
+                    numOfLessonsTextView.text = "共${numOfLesson}门课程"
                     expandIV.apply {
-                        setImageResource(R.drawable.icon_arrow_down)
                         setOnClickListener {
-                            arrowIconClickListener?.onClick()
+//                            if (onlyShowTitleNow) {
+//                                gradeItemList.apply {
+//                                    addAll(titleItem)
+//                                    addAll(contentItem)
+//                                    notifyDataSetChanged()
+//                                    onlyShowTitleNow =  false
+//                                }
+//                            } else {
+//                                gradeItemList = titleItem
+//                                notifyDataSetChanged()
+//                                onlyShowTitleNow = true
+//                            }
                         }
                     }
                 }
@@ -58,10 +75,6 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
         return gradeItemList.size
     }
 
-    fun setOnArrowIconClickListener(arrowIconClickListener: ArrowIconClickListener) {
-        this.arrowIconClickListener = arrowIconClickListener
-    }
-
     inner class GradeTitle(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var semesterTV: TextView = itemView.findViewById(R.id.semesterTV)
         val numOfLessonsTextView: TextView = itemView.findViewById(R.id.numOfLessons)
@@ -74,7 +87,4 @@ class GradeItemAdapter(val context: Context, val gradeItemList: ArrayList<GradeI
         val divLine: View = itemView.findViewById(R.id.divLine)
     }
 
-    interface ArrowIconClickListener {
-        fun onClick()
-    }
 }

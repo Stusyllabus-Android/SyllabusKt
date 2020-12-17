@@ -29,26 +29,30 @@ class GradeModel(private val mContext: Context) {
             .enqueue(object : retrofit2.Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     Log.i(TAG, response.body().toString())
-                    officialAccountApi.getGrade().enqueue(object : retrofit2.Callback<String> {
-                        override fun onResponse(call: Call<String>, response: Response<String>) {
-                            Log.i(TAG, response.body().toString())
-                            /**
-                             * <p>学期:2019-2020学年春季学期课程:古代戏曲经典专题研究成绩:86</p>
-                             */
-                            val gradeArray = arrayListOf<Grade>()
-                            Jsoup.parseBodyFragment(response.body())
-                                .getElementsByTag("p").forEach { element ->
-                                if (element.text().split(":").size == 4) {
-                                    gradeArray.add(generateGrade(element.text()))
+                    if (response.body().toString().contains("成功")) {
+                        officialAccountApi.getGrade().enqueue(object : retrofit2.Callback<String> {
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                Log.i(TAG, response.body().toString())
+                                if (response.body().toString().contains("成绩查询")) {
+                                    /**
+                                     * <p>学期:2019-2020学年春季学期课程:古代戏曲经典专题研究成绩:86</p>
+                                     */
+                                    val gradeArray = arrayListOf<Grade>()
+                                    Jsoup.parseBodyFragment(response.body())
+                                        .getElementsByTag("p").forEach { element ->
+                                            if (element.text().split(":").size == 4) {
+                                                gradeArray.add(generateGrade(element.text()))
+                                            }
+                                        }
+                                    listener.onSuccess(gradeArray)
                                 }
                             }
-                            listener.onSuccess(gradeArray)
-                        }
 
-                        override fun onFailure(call: Call<String>, t: Throwable) {
-                            listener.onFailure(t.message ?: "")
-                        }
-                    })
+                            override fun onFailure(call: Call<String>, t: Throwable) {
+                                listener.onFailure(t.message ?: "")
+                            }
+                        })
+                    }
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
@@ -59,10 +63,10 @@ class GradeModel(private val mContext: Context) {
 
     private fun generateGrade(content: String): Grade {
         val rawGradeInfo = content.split(":")
-        Log.i(TAG, "academicYear: ${rawGradeInfo[1].substring(0, 9)}")
-        Log.i(TAG, "semester: ${rawGradeInfo[1].substring(11, 15)}")
-        Log.i(TAG, "lessonName: ${rawGradeInfo[2].substring(0, rawGradeInfo[2].indexOf("成"))}")
-        Log.i(TAG, "grade: ${rawGradeInfo[3].toInt()}")
+//        Log.i(TAG, "academicYear: ${rawGradeInfo[1].substring(0, 9)}")
+//        Log.i(TAG, "semester: ${rawGradeInfo[1].substring(11, 15)}")
+//        Log.i(TAG, "lessonName: ${rawGradeInfo[2].substring(0, rawGradeInfo[2].indexOf("成"))}")
+//        Log.i(TAG, "grade: ${rawGradeInfo[3].toInt()}")
         return Grade(rawGradeInfo[1].substring(0, 9) + rawGradeInfo[1].substring(11, 15), rawGradeInfo[2].substring(0, rawGradeInfo[2].indexOf("成")), rawGradeInfo[3].toInt())
     }
 
