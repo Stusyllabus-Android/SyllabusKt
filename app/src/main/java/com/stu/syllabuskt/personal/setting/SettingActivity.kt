@@ -19,6 +19,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id) {
+            R.id.aboutUs -> startAboutUs()
             R.id.logout -> logout()
         }
     }
