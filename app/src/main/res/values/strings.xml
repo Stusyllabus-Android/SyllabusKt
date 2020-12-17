@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SyllabusKt</string>
+    <string name="app_name">汕学派</string>
 
     <!-- 登录   -->
     <string name="account">账号</string>

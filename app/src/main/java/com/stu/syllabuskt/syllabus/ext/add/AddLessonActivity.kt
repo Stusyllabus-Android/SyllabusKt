@@ -1,9 +1,11 @@
 package com.stu.syllabuskt.syllabus.ext.add
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -13,6 +15,7 @@ import com.bigkoo.pickerview.view.OptionsPickerView
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseActivity
 import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
+import com.stu.syllabuskt.utils.ActionTrigger
 import com.stu.syllabuskt.utils.ToastUtil
 
 class AddLessonActivity : BaseActivity(), AddLessonContract.IView, View.OnClickListener {
@@ -30,6 +33,8 @@ class AddLessonActivity : BaseActivity(), AddLessonContract.IView, View.OnClickL
 
     private var weekSelected: String? = null
     private var timeSelected: String? = null
+
+    val trigger = ActionTrigger(1000)
 
     override fun getContentView(): Int {
         return R.layout.activity_add_lesson
@@ -62,11 +67,21 @@ class AddLessonActivity : BaseActivity(), AddLessonContract.IView, View.OnClickL
             R.id.backIcon -> finish()
             R.id.customWeek -> chooseWeek()
             R.id.detail -> chooseDetail()
-            R.id.addLessonButton -> presenter.addLesson(lessonNameET.text.toString(), classroomET.text.toString(), weekSelected ?: "", timeSelected ?: "")
+            R.id.addLessonButton -> {
+                if (!trigger.canTrigger()) return
+                presenter.addLesson(
+                    lessonNameET.text.toString(),
+                    classroomET.text.toString(),
+                    weekSelected ?: "",
+                    timeSelected ?: ""
+                )
+            }
         }
     }
 
-    override fun chooseWeek(): String {
+    override fun chooseWeek() {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
         val startWeek = mutableListOf<Int>()
         val endWeek = mutableListOf<List<Int>>()
         for (i in 1..20) {
@@ -90,11 +105,11 @@ class AddLessonActivity : BaseActivity(), AddLessonContract.IView, View.OnClickL
             .build<Any>()
         optionsPickerView.setPicker(startWeek as List<Nothing>?, endWeek as List<Nothing>?)
         optionsPickerView.show()
-        Log.d(TAG, "chooseWeek: $weekSelected")
-        return weekSelected ?: ""
     }
 
     override fun chooseDetail() {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
         val day = mutableListOf<String>()
         val time = mutableListOf<String>()
         for (i in 1..7) {
