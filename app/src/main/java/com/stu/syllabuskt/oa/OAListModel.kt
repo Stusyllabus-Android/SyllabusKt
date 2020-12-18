@@ -19,7 +19,7 @@ class OAListModel(private val mContext: Context) {
         yiBanApi.getOAList(pageIndex.toLong(), 10, -1)
             .enqueue(object : retrofit2.Callback<List<OABean>> {
                 override fun onFailure(call: Call<List<OABean>>, t: Throwable) {
-                    oaModelListener.onFailure(t.message ?: "")
+                    oaModelListener.onFailure("")
                 }
 
                 override fun onResponse(

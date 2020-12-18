@@ -26,6 +26,56 @@ public class YiBanToken {
     @SerializedName("nonce")
     public String nonce;
 
+
+    public YiBanToken(long vid, long timestamp, String token, String app, String nonce) {
+        super();
+        this.vid = vid;
+        this.timestamp = timestamp;
+        this.token = token;
+        this.app = app;
+        this.nonce = nonce;
+    }
+
+    public long getVid() {
+        return vid;
+    }
+
+    public void setVid(long vid) {
+        this.vid = vid;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getApp() {
+        return app;
+    }
+
+    public void setApp(String app) {
+        this.app = app;
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
     @Override
     public String toString() {
         return "YiBanToken{" +

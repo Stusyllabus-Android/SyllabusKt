@@ -18,7 +18,7 @@ class OADetailModel(private val mContext: Context) {
         yiBanApi.getOADetail(id.toLong())
             .enqueue(object : retrofit2.Callback<String> {
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    oaDetailModelListener.onFailure(t.message ?: "")
+                    oaDetailModelListener.onFailure( "网络状态出错，请稍后重试")
                 }
 
                 override fun onResponse(call: Call<String>, response: Response<String>) {
