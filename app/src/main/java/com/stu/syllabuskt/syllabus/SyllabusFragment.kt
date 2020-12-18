@@ -22,6 +22,7 @@ import com.stu.syllabuskt.login.Target
 import com.stu.syllabuskt.login.YBBusinessModel
 import com.stu.syllabuskt.utils.ColorUtil
 import com.stu.syllabuskt.utils.ToastUtil
+import kotlinx.android.synthetic.main.activity_setting.view.*
 import kotlinx.android.synthetic.main.fragment_syllabus.*
 
 private const val POSITION_PARAM = "position_param"
@@ -98,6 +99,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                     override fun onSuccess() {
                         refreshSyllabusLayout.isRefreshing = false
                         gridLayout.removeAllViews()
+                        initGridLayout()
                         syllabusPresenter.init()
                         ToastUtil.showShort(context!!, "刷新成功")
                     }

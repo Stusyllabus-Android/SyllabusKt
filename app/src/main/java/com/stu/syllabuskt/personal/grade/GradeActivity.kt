@@ -17,16 +17,7 @@ class GradeActivity() : BaseActivity(), IGradeContract.IView {
     private lateinit var titleTV: TextView
     private lateinit var backIcon: ImageView
     private lateinit var refreshGradeLayout: SwipeRefreshLayout
-    private lateinit var mGradeContainer1: RecyclerView
-    private lateinit var mGradeContainer2: RecyclerView
-    private lateinit var mGradeContainer3: RecyclerView
-    private lateinit var mGradeContainer4: RecyclerView
-    private lateinit var mGradeContainer5: RecyclerView
-    private lateinit var mGradeContainer6: RecyclerView
-    private lateinit var mGradeContainer7: RecyclerView
-    private lateinit var mGradeContainer8: RecyclerView
-    private lateinit var mGradeContainer9: RecyclerView
-    private lateinit var mGradeContainer10: RecyclerView
+    private lateinit var recyclerViewContainer: RecyclerView
 
     private var numOfSemester = 0
 
@@ -55,16 +46,7 @@ class GradeActivity() : BaseActivity(), IGradeContract.IView {
             setOnClickListener{ finish() }
         }
         refreshGradeLayout = findViewById(R.id.refreshGradeLayout)
-        mGradeContainer1 = findViewById(R.id.gradeContainer1)
-        mGradeContainer2 = findViewById(R.id.gradeContainer2)
-        mGradeContainer3 = findViewById(R.id.gradeContainer3)
-        mGradeContainer4 = findViewById(R.id.gradeContainer4)
-        mGradeContainer5 = findViewById(R.id.gradeContainer5)
-        mGradeContainer6 = findViewById(R.id.gradeContainer6)
-        mGradeContainer7 = findViewById(R.id.gradeContainer7)
-        mGradeContainer8 = findViewById(R.id.gradeContainer8)
-        mGradeContainer9 = findViewById(R.id.gradeContainer9)
-        mGradeContainer10 = findViewById(R.id.gradeContainer10)
+        recyclerViewContainer = findViewById(R.id.recyclerViewContainer)
         presenter.getGrade(refreshListener)
         refreshGradeLayout.isRefreshing = true
         initEvent()
@@ -77,10 +59,9 @@ class GradeActivity() : BaseActivity(), IGradeContract.IView {
     }
 
     override fun setGradeDateAndShow(gradeArr: ArrayList<Grade>)  {
-        val formattedData: ArrayList<ArrayList<GradeItemBean>> = dealWithData(gradeArr)
-        for (i in 1..formattedData.size) {
-            dealShowData(i, formattedData[i - 1])
-        }
+        recyclerViewContainer.layoutManager = LinearLayoutManager(this)
+        recyclerViewContainer.adapter = RecyclerViewContainerAdapter(this, dealWithData(gradeArr))
+
     }
 
     private fun dealWithData(gradeArr: ArrayList<Grade>): ArrayList<ArrayList<GradeItemBean>> {
@@ -107,60 +88,5 @@ class GradeActivity() : BaseActivity(), IGradeContract.IView {
             buckets.add(temp)
         }
         return buckets
-    }
-
-    private fun dealShowData(i: Int, gradeItemBeanList: ArrayList<GradeItemBean>) {
-        when (i) {
-            1 -> {
-                mGradeContainer1.visibility = View.VISIBLE
-                mGradeContainer1.layoutManager = LinearLayoutManager(this)
-                mGradeContainer1.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            2 -> {
-                mGradeContainer2.visibility = View.VISIBLE
-                mGradeContainer2.layoutManager = LinearLayoutManager(this)
-                mGradeContainer2.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            3 -> {
-                mGradeContainer3.visibility = View.VISIBLE
-                mGradeContainer3.layoutManager = LinearLayoutManager(this)
-                mGradeContainer3.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            4 -> {
-                mGradeContainer4.visibility = View.VISIBLE
-                mGradeContainer4.layoutManager = LinearLayoutManager(this)
-                mGradeContainer4.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            5 -> {
-                mGradeContainer5.visibility = View.VISIBLE
-                mGradeContainer5.layoutManager = LinearLayoutManager(this)
-                mGradeContainer5.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            6 -> {
-                mGradeContainer6.visibility = View.VISIBLE
-                mGradeContainer6.layoutManager = LinearLayoutManager(this)
-                mGradeContainer6.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            7 -> {
-                mGradeContainer7.visibility = View.VISIBLE
-                mGradeContainer7.layoutManager = LinearLayoutManager(this)
-                mGradeContainer7.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            8 -> {
-                mGradeContainer8.visibility = View.VISIBLE
-                mGradeContainer8.layoutManager = LinearLayoutManager(this)
-                mGradeContainer8.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            9 -> {
-                mGradeContainer9.visibility = View.VISIBLE
-                mGradeContainer9.layoutManager = LinearLayoutManager(this)
-                mGradeContainer9.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-            10 -> {
-                mGradeContainer10.visibility = View.VISIBLE
-                mGradeContainer10.layoutManager = LinearLayoutManager(this)
-                mGradeContainer10.adapter = GradeItemAdapter(this, gradeItemBeanList, gradeItemBeanList.size - 1)
-            }
-        }
     }
 }
