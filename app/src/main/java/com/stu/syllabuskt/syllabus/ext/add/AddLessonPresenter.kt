@@ -20,7 +20,7 @@ class AddLessonPresenter(val context: Context, val view: AddLessonContract.IView
     ) {
         if (StuContext.getSharePreferences(context).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent") == "Non-existent") {
             view.showErrorMSG("请先到个人主页设置当前学年学期~")
-        } else if (lessonName.isEmpty()||classroom.isEmpty()||weekSelected.isEmpty()||detail.isEmpty()){
+        } else if (lessonName.isEmpty()||weekSelected.isEmpty()||detail.isEmpty()){
             view.showErrorMSG("信息未填写完整")
         }else {
             var splitString=weekSelected.split("-")
@@ -29,8 +29,8 @@ class AddLessonPresenter(val context: Context, val view: AddLessonContract.IView
                 return
             }
             splitString=detail.split(" ")[1].split("-")
-            if (Integer.parseInt(splitString[1])-Integer.parseInt(splitString[0])<0){
-                view.showErrorMSG("开始时间不能大于结束周数")
+            if (splitString[0]>splitString[1]){
+                view.showErrorMSG("开始时间不能大于结束时间")
                 return
             }
 
