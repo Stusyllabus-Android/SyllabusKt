@@ -69,7 +69,7 @@ class OAListFragment : BaseFragment(), OAListContract.view {
     }
 
     override fun showErrMsg(msg: String) {
-        ToastUtil.showShort(context!!, msg)
+//        ToastUtil.showShort(context!!, msg)
     }
 
     override fun setPagerAdapter(oaList: List<OABean>?) {

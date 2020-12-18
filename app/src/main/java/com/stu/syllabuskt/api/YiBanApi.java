@@ -1,8 +1,10 @@
 package com.stu.syllabuskt.api;
 
+import com.stu.syllabuskt.bean.AccountNo;
 import com.stu.syllabuskt.bean.OABean;
 import com.stu.syllabuskt.bean.YiBanTimeTable;
 import com.stu.syllabuskt.bean.YiBanToken;
+import com.stu.syllabuskt.bean.ExpenseRecord;
 
 import java.util.List;
 
@@ -41,4 +43,22 @@ public interface YiBanApi {
 
     @GET("api/api/oadetail")
     Call<String> getOADetail(@Query("id") long id);
+
+    @GET("api/api/alipayaccount/")
+    Call<AccountNo> getAccountNo(@Query("vid") long vid,
+                                 @Query("timestamp") long timestamp,
+                                 @Query("app") String app,
+                                 @Query("token") String token,
+                                 @Query("nonce") String nonce);
+
+    @GET("api/api/alipayconsume/")
+    Call<List<ExpenseRecord>> getExpenseRecord(@Query("vid") long vid,
+                                               @Query("accountNo") long accountNo,
+                                               @Query("start") String start,
+                                               @Query("end") String end,
+                                               @Query("timestamp") long timestamp,
+                                               @Query("app") String app,
+                                               @Query("token") String token,
+                                               @Query("nonce") String nonce);
+
 }
