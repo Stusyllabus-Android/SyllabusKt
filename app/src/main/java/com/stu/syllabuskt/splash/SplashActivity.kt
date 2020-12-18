@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun dealSplashBusiness() {
-//        Thread.sleep(1000)
+        Thread.sleep(1000)
         if (StuContext.getDBService().getUserAccount(this@SplashActivity).isNullOrEmpty()
             || StuContext.getDBService().getUserPassword(this@SplashActivity).isNullOrEmpty())
             toLoginView()
