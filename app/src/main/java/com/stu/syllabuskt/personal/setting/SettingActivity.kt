@@ -9,6 +9,8 @@ import com.stu.syllabuskt.App
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseActivity
+import com.stu.syllabuskt.utils.ClipboardUtil
+import com.stu.syllabuskt.utils.ToastUtil
 
 class SettingActivity : BaseActivity(), View.OnClickListener {
 
@@ -30,9 +32,15 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id) {
+            R.id.share2 -> share2()
             R.id.aboutUs -> startAboutUs()
             R.id.logout -> logout()
         }
+    }
+
+    private fun share2() {
+        ClipboardUtil.copyToClipboard("https://fir.im/stusyllabuspie")
+        ToastUtil.showShort(this, "已复制下载链接到剪贴板")
     }
 
     private fun logout() {
