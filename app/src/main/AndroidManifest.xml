@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeClassic"
         tools:targetApi="n">
-        <activity android:name=".personal.setting.AboutUsActivity"></activity>
+        <activity android:name=".personal.setting.FeedbackActivity" />
+        <activity android:name=".personal.setting.AboutUsActivity" />
         <activity android:name=".syllabus.ext.delete.DeleteLessonActivity" />
         <activity android:name=".syllabus.ext.add.AddLessonActivity" />
         <activity android:name=".personal.own.OwnActivity" />

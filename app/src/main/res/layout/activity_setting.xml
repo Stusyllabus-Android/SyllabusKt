@@ -44,7 +44,6 @@
         android:id="@+id/aboutUs"
         android:layout_below="@id/divLine1"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
