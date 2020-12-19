@@ -12,3 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+/release
+/src/key.jks
+/src/key.jsk.old
