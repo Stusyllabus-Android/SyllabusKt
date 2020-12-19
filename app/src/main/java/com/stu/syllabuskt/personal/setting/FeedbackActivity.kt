@@ -46,7 +46,7 @@ class FeedbackActivity : BaseActivity() {
             return
         }
         ownApi.postFeedback(
-            StuContext.getDBService().getUserPassword(this),
+            StuContext.getDBService().getUserAccount(this),
             content,
             App.versionCode,
             "手机厂商： ${android.os.Build.BRAND}, 手机型号： ${android.os.Build.MODEL}, 系统版本号：${android.os.Build.VERSION.RELEASE}"
@@ -56,7 +56,7 @@ class FeedbackActivity : BaseActivity() {
                 response: Response<FeedbackCallBack>
             ) {
                 if (response.body()?.code == "1") {
-                    feedbackET.text.clear()
+                    feedbackET.setText("")
                     ToastUtil.showShort(this@FeedbackActivity, "已收到您的反馈~")
                 } else {
                     ToastUtil.showShort(this@FeedbackActivity, "反馈发送失败")
