@@ -88,6 +88,11 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
 
     private fun initEvent() {
         mRefreshLayout.setOnRefreshListener {
+            if (StuContext.getSharePreferences(context!!).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent") == "Non-existent") {
+               ToastUtil.showShort(context!!, "请先到个人主页设置当前学年学期~")
+                refreshSyllabusLayout.isRefreshing = false
+                return@setOnRefreshListener
+            }
             ybBusinessModel.login(
                 StuContext.getDBService().getUserAccount(context!!),
                 StuContext.getDBService().getUserPassword(context!!),

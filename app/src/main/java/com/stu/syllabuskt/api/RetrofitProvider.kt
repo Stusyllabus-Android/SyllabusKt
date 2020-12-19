@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit
 object RetrofitProvider {
     private val YIBAN_BASE_URL = "https://yiban.stu.edu.cn/"
     private val OFFICIAL_WC_BASE_URL = "http://wechat.stu.edu.cn/"
+    private val OWN_BASE_URL = "http://123.57.88.197:85/"
 
     fun getYiBanRetrofit(context: Context): Retrofit {
         return Retrofit.Builder()
@@ -39,6 +40,18 @@ object RetrofitProvider {
                 .cookieJar(PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context)))
                 .build())
             .baseUrl(OFFICIAL_WC_BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun getOwnRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .client(OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .callTimeout(60, TimeUnit.SECONDS)
+                .build())
+            .baseUrl(OWN_BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -18,7 +18,7 @@
 
         <EditText
             android:id="@+id/feedbackEditText"
-            android:hint="您是我们最好的测试与产品：）"
+            android:hint="    不少于7个字符"
             android:padding="5dp"
             android:gravity="start"
             android:maxLength="300"
@@ -29,15 +29,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-        <TextView
-            android:text="不多于三百字"
-            android:textColor="@color/material_grey_500"
-            android:layout_margin="5dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
