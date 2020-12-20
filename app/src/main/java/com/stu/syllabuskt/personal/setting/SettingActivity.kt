@@ -40,7 +40,7 @@ class SettingActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun share2() {
-        ClipboardUtil.copyToClipboard("https://fir.im/stusyllabuspie")
+        ClipboardUtil.copyToClipboard("http://d.firim.pro/stupie")
         ToastUtil.showShort(this, "已复制下载链接到剪贴板")
     }
 

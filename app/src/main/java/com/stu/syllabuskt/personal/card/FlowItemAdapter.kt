@@ -33,10 +33,10 @@ class FlowItemAdapter(val mContext: Context, private val recordList: List<Expens
                 } else if (it.collector.contains("POS")) {
                     imageView.setImageDrawable(mContext.resources.getDrawable(R.drawable.icon_market))
                 }
-                siteTextView.text = it.collector
+                siteTextView.text = it.collector.trim()
                 dateTextView.text = it.time.substring(0, it.time.indexOf("+")).replace("T", " ")
                 costTextView.text = (it.cost / 100.0).toString() + "元"
-                consumeType.text = it.type
+                consumeType.text = it.type.trim()
             }
         }
     }

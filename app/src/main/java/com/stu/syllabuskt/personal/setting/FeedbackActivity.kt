@@ -41,7 +41,7 @@ class FeedbackActivity : BaseActivity() {
     }
 
     private fun doFeedBack(content: String) {
-        if (content.length < 10) {
+        if (content.length < 7) {
             ToastUtil.showShort(this, "请输入不少于7个字符")
             return
         }
