@@ -67,7 +67,7 @@ class GradeModel(private val mContext: Context) {
 //        Log.i(TAG, "semester: ${rawGradeInfo[1].substring(11, 15)}")
 //        Log.i(TAG, "lessonName: ${rawGradeInfo[2].substring(0, rawGradeInfo[2].indexOf("成"))}")
 //        Log.i(TAG, "grade: ${rawGradeInfo[3].toInt()}")
-        return Grade(rawGradeInfo[1].substring(0, 9) + rawGradeInfo[1].substring(11, 15), rawGradeInfo[2].substring(0, rawGradeInfo[2].indexOf("成")), rawGradeInfo[3])
+        return Grade(rawGradeInfo[1].substring(0, 9) + rawGradeInfo[1].substring(11, 15), rawGradeInfo[2].substring(0, rawGradeInfo[2].length - 2), rawGradeInfo[3])
     }
 
     interface GetGradeListener {
