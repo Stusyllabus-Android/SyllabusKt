@@ -234,7 +234,17 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     }
 
     private fun drawGrid(showLessonBean: Lesson, wString: String, start: Int) {
-        val time: List<String> = wString.split("-")
+        //处理单双周的课程
+        var detailWString = wString
+        if (detailWString.contains("单")) {
+            if (weekIndex % 2 == 0) return
+            else detailWString = detailWString.replace("单", "")
+        }
+        if (detailWString.contains("双")) {
+            if (weekIndex % 2 != 0) return
+            else detailWString = detailWString.replace("双", "")
+        }
+        val time: List<String> = detailWString.split("-")
         val lessonLinearLayout = LayoutInflater.from(activity).inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
         val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById(R.id.lessonInfoRipple) as MaterialRippleLayout
         lessonRippleLayout.foregroundGravity = Gravity.CENTER

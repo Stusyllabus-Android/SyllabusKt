@@ -9,7 +9,7 @@ import java.util.*
 /**
  * Create by yuan on 2020/12/8
  */
-class SyllabusModel(mContext: Context) : ISyllabusContract.IModel {
+class SyllabusModel(val mContext: Context) : ISyllabusContract.IModel {
 
     private val TAG = "SyllabusModel"
 
@@ -98,14 +98,15 @@ class SyllabusModel(mContext: Context) : ISyllabusContract.IModel {
                         TAG,
                         "convertTablesToLessons: " + time[j] + time[j][indexOfSectionBeginBound + 1] + " " + time[j][indexOfSectionEndBound - 2]
                     )
+                    val detailTime = if (time[j].contains("单")) "单$first-$last" else if (time[j].contains("双")) "双$first-$last" else "$first-$last"
                     when (time[j].substring(0, 2)) {
-                        "周日" -> daysBean.setW0("$first-$last")
-                        "周一" -> daysBean.setW1("$first-$last")
-                        "周二" -> daysBean.setW2("$first-$last")
-                        "周三" -> daysBean.setW3("$first-$last")
-                        "周四" -> daysBean.setW4("$first-$last")
-                        "周五" -> daysBean.setW5("$first-$last")
-                        "周六" -> daysBean.setW6("$first-$last")
+                        "周日" -> daysBean.setW0(detailTime)
+                        "周一" -> daysBean.setW1(detailTime)
+                        "周二" -> daysBean.setW2(detailTime)
+                        "周三" -> daysBean.setW3(detailTime)
+                        "周四" -> daysBean.setW4(detailTime)
+                        "周五" -> daysBean.setW5(detailTime)
+                        "周六" -> daysBean.setW6(detailTime)
                     }
                 }
             }
