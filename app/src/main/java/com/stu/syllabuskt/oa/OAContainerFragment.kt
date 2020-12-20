@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.base.BaseFragment

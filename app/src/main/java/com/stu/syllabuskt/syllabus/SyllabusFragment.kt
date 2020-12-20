@@ -90,7 +90,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         mRefreshLayout.setOnRefreshListener {
             if (StuContext.getSharePreferences(context!!).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent") == "Non-existent") {
                ToastUtil.showShort(context!!, "请先到个人主页设置当前学年学期~")
-                refreshSyllabusLayout.isRefreshing = false
+                mRefreshLayout.isRefreshing = false
                 return@setOnRefreshListener
             }
             ybBusinessModel.login(
@@ -98,11 +98,11 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 StuContext.getDBService().getUserPassword(context!!),
                 object : YBBusinessModel.YBBusinessListener {
                     override fun onProgress() {
-                        refreshSyllabusLayout.isRefreshing = true
+                        mRefreshLayout.isRefreshing = true
                     }
 
                     override fun onSuccess() {
-                        refreshSyllabusLayout.isRefreshing = false
+                        mRefreshLayout.isRefreshing = false
                         gridLayout.removeAllViews()
                         initGridLayout()
                         syllabusPresenter.init()
@@ -110,7 +110,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                     }
 
                     override fun onFailure(msg: String) {
-                        refreshSyllabusLayout.isRefreshing = false
+                        mRefreshLayout.isRefreshing = false
                         ToastUtil.showShort(context!!, msg)
                     }
                 })
