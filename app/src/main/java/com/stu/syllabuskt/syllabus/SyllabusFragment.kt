@@ -239,7 +239,11 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById(R.id.lessonInfoRipple) as MaterialRippleLayout
         lessonRippleLayout.foregroundGravity = Gravity.CENTER
         val lessonTextView = lessonLinearLayout.findViewById<TextView>(R.id.lessonTextView)
-        lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom()
+        if (!showLessonBean.getTeacher().isNullOrEmpty()) {
+            lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom() + "\n@" + showLessonBean.getTeacher()
+        } else {
+            lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom()
+        }
         lessonTextView.width = gridWidth
         lessonTextView.height = gridHeight * (time[1].toInt() - time[0].toInt() + 1)
         val shape = resources.getDrawable(R.drawable.grid_background) as GradientDrawable
