@@ -6,6 +6,7 @@ import com.stu.syllabuskt.login.LoginActivity
 import com.stu.syllabuskt.personal.card.CardActivity
 import com.stu.syllabuskt.personal.exam.ExaminationActivity
 import com.stu.syllabuskt.personal.grade.GradeActivity
+import com.stu.syllabuskt.personal.mail.MailActivity
 import com.stu.syllabuskt.personal.setting.SettingActivity
 
 /**
@@ -23,6 +24,10 @@ fun PersonalDispatcher.startExamView() {
 
 fun PersonalDispatcher.startGradeView() {
     fragment.startActivity(Intent(fragment.context, GradeActivity::class.java))
+}
+
+fun PersonalDispatcher.startMailView() {
+    fragment.startActivity(Intent(fragment.context, MailActivity::class.java))
 }
 
 fun PersonalDispatcher.startSetting() {

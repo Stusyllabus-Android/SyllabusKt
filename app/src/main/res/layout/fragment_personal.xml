@@ -306,7 +306,7 @@
         tools:ignore="RtlSymmetry">
         <ImageView
             android:id="@+id/scoreIcon"
-            android:src="@drawable/icon_score"
+            android:src="@drawable/icon_score_100"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -322,6 +322,48 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/scoreIcon"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:src="@drawable/icon_in"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/grade" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mailLayout"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        tools:ignore="RtlSymmetry">
+        <ImageView
+            android:id="@+id/mailIcon"
+            android:src="@drawable/icon_mail"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/mail" />
+        <TextView
+            android:text="@string/mail"
+            android:textSize="18sp"
+            android:textColor="#060911"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/mailIcon"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/mailIcon"
             tools:ignore="RelativeOverlap" />
 
         <ImageView

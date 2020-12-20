@@ -14,7 +14,7 @@
         android:layout_weight="1"/>
 
     <View
-        android:background="#EBEDF0"
+        android:background="@color/material_grey_100"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
 
@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="?android:attr/borderlessButtonStyle"
+        app:itemBackground="@null"
         app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/navigation_tab_active"
         app:itemTextAppearanceInactive="@style/navigation_tab_inactive"
