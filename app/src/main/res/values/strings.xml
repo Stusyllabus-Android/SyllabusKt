@@ -34,6 +34,7 @@
     <string name="school_smart_card">一卡通</string>
     <string name="examination">考试</string>
     <string name="grade">成绩</string>
+    <string name="mail">邮箱</string>
     <string name="setting">设置</string>
     <!-- 设置-->
     <string name="help_feedback">帮助与反馈</string>

@@ -63,6 +63,7 @@ class SyllabusContainerFragment : BaseFragment() {
                 R.id.addLesson -> startAddLesson()
                 R.id.deleteLesson -> startDeleteLesson()
             }
+            drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
         syllabusContainer.adapter = SyllabusPagerAdapter(
@@ -106,7 +107,6 @@ class SyllabusContainerFragment : BaseFragment() {
                 }
             })
         }.show(childFragmentManager, "SetWeekFragment")
-        drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

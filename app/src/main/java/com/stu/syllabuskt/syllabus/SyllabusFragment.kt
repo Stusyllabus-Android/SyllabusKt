@@ -90,7 +90,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
         mRefreshLayout.setOnRefreshListener {
             if (StuContext.getSharePreferences(context!!).getString(SyllabusContainerFragment.CurrentSemesterKey, "Non-existent") == "Non-existent") {
                ToastUtil.showShort(context!!, "请先到个人主页设置当前学年学期~")
-                refreshSyllabusLayout.isRefreshing = false
+                mRefreshLayout.isRefreshing = false
                 return@setOnRefreshListener
             }
             ybBusinessModel.login(
@@ -98,11 +98,11 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                 StuContext.getDBService().getUserPassword(context!!),
                 object : YBBusinessModel.YBBusinessListener {
                     override fun onProgress() {
-                        refreshSyllabusLayout.isRefreshing = true
+                        mRefreshLayout.isRefreshing = true
                     }
 
                     override fun onSuccess() {
-                        refreshSyllabusLayout.isRefreshing = false
+                        mRefreshLayout.isRefreshing = false
                         gridLayout.removeAllViews()
                         initGridLayout()
                         syllabusPresenter.init()
@@ -110,7 +110,7 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
                     }
 
                     override fun onFailure(msg: String) {
-                        refreshSyllabusLayout.isRefreshing = false
+                        mRefreshLayout.isRefreshing = false
                         ToastUtil.showShort(context!!, msg)
                     }
                 })
@@ -234,12 +234,26 @@ class SyllabusFragment : BaseFragment(), ISyllabusContract.IView {
     }
 
     private fun drawGrid(showLessonBean: Lesson, wString: String, start: Int) {
-        val time: List<String> = wString.split("-")
+        //处理单双周的课程
+        var detailWString = wString
+        if (detailWString.contains("单")) {
+            if (weekIndex % 2 == 0) return
+            else detailWString = detailWString.replace("单", "")
+        }
+        if (detailWString.contains("双")) {
+            if (weekIndex % 2 != 0) return
+            else detailWString = detailWString.replace("双", "")
+        }
+        val time: List<String> = detailWString.split("-")
         val lessonLinearLayout = LayoutInflater.from(activity).inflate(R.layout.lesson_grid, null, false) as MaterialRippleLayout
         val lessonRippleLayout: MaterialRippleLayout = lessonLinearLayout.findViewById(R.id.lessonInfoRipple) as MaterialRippleLayout
         lessonRippleLayout.foregroundGravity = Gravity.CENTER
         val lessonTextView = lessonLinearLayout.findViewById<TextView>(R.id.lessonTextView)
-        lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom()
+        if (!showLessonBean.getTeacher().isNullOrEmpty()) {
+            lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom() + "\n@" + showLessonBean.getTeacher()
+        } else {
+            lessonTextView.text = showLessonBean.getName().toString() + "\n@" + showLessonBean.getRoom()
+        }
         lessonTextView.width = gridWidth
         lessonTextView.height = gridHeight * (time[1].toInt() - time[0].toInt() + 1)
         val shape = resources.getDrawable(R.drawable.grid_background) as GradientDrawable

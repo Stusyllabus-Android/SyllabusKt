@@ -33,6 +33,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
     lateinit var schoolSmartCardLayout: RelativeLayout
 //    lateinit var examinationLayout: RelativeLayout
     lateinit var gradeLayout: RelativeLayout
+    lateinit var mailLayout: RelativeLayout
     lateinit var settingLayout: RelativeLayout
     lateinit var currentAccountTV: TextView
     //设置学期
@@ -62,6 +63,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             schoolSmartCardLayout = it.findViewById(R.id.smartCardLayout)
 //            examinationLayout = it.findViewById(R.id.examinationLayout)
             gradeLayout = it.findViewById(R.id.gradeLayout)
+            mailLayout = it.findViewById(R.id.mailLayout)
             settingLayout = it.findViewById(R.id.settingLayout)
         }
 //        view.findViewById<ImageView>(R.id.headIV).let {
@@ -81,6 +83,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             schoolSmartCardLayout.setOnClickListener(it)
 //            examinationLayout.setOnClickListener(it)
             gradeLayout.setOnClickListener(it)
+            mailLayout.setOnClickListener(it)
             settingLayout.setOnClickListener(it)
 
         }
@@ -93,6 +96,7 @@ class PersonalDispatcher(val fragment: PersonalFragment): IDispatcher, View.OnCl
             R.id.smartCardLayout -> startCardView()
 //            R.id.examinationLayout -> startExamView()
             R.id.gradeLayout -> startGradeView()
+            R.id.mailLayout -> startMailView()
             R.id.settingLayout -> startSetting()
         }
     }
