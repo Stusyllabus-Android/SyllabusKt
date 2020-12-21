@@ -8,11 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.stu.syllabuskt.R
-import com.stu.syllabuskt.StuContext
 import com.stu.syllabuskt.base.BaseActivity
 import com.stu.syllabuskt.CheckUpdateModel
 import com.stu.syllabuskt.Result
-import com.stu.syllabuskt.syllabus.SyllabusContainerFragment
 import com.stu.syllabuskt.utils.ToastUtil
 
 class AboutUsActivity : BaseActivity() {
@@ -31,8 +29,7 @@ class AboutUsActivity : BaseActivity() {
         findViewById<Button>(R.id.checkUpdateBtn).setOnClickListener {
             CheckUpdateModel().canUpdateWithVersionCode(object : CheckUpdateModel.UpdateListener {
                 override fun canUpdate(result: Result) {
-                    if (result.canUpdate && StuContext.getSharePreferences(this@AboutUsActivity).getString(
-                            SyllabusContainerFragment.CurrentSemesterKey,"Non-existent") != "Non-existent") {
+                    if (result.canUpdate) {
                         AlertDialog.Builder(this@AboutUsActivity)
                             .setTitle("版本更新提醒")
                             .setMessage(result.versionInfo?.description ?: "")
