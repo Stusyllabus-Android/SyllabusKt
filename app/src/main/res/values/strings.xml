@@ -15,6 +15,7 @@
     <string name="personal">个人</string>
     <!-- 课程模块-->
     <string name="set_curr_week">设定当前周</string>
+    <string name="set_wallpaper">设置背景</string>
     <string name="add_lesson">添加课程</string>
     <string name="delete_lesson">删除课程</string>
     <string name="lesson_name">课程名　</string>

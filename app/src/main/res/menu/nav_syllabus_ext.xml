@@ -4,6 +4,9 @@
         <item android:id="@+id/setWeek"
             android:icon="@drawable/icon_ding"
             android:title="@string/set_curr_week"/>
+        <item android:id="@+id/setBg"
+            android:icon="@drawable/icon_background"
+            android:title="@string/set_wallpaper"/>
         <item android:id="@+id/addLesson"
             android:icon="@drawable/icon_add"
             android:title="@string/add_lesson"/>
