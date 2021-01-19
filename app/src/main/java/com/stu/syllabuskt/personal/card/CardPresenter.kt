@@ -3,8 +3,8 @@ package com.stu.syllabuskt.personal.card
 import android.content.Context
 import android.util.Log
 import com.stu.syllabuskt.StuContext
-import com.stu.syllabuskt.Target
-import com.stu.syllabuskt.YBBusinessModel
+import com.stu.syllabuskt.login.Target
+import com.stu.syllabuskt.login.YBBusinessModel
 
 /**
  * Create by yuan on 2020/12/18

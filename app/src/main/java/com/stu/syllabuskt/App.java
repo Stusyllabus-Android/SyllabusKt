@@ -7,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
+import androidx.multidex.MultiDex;
+
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -28,6 +30,7 @@ public class App extends Application {
         super.onCreate();
         Log.i(TAG, "Application onCreate");
         context = getApplicationContext();
+        MultiDex.install(this);
         initVersionInfo();
         UMConfigure.preInit(this, "5fda1746dd2891533921a2f2", "Umeng");
         UMConfigure.init(this, "5fda1746dd2891533921a2f2", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
