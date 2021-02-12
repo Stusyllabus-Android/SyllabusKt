@@ -1,2 +1,3 @@
+include ':PictureSelector'
 rootProject.name='SyllabusKt'
 include ':app'

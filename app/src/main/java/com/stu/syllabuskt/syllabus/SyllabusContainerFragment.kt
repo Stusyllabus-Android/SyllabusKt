@@ -1,7 +1,9 @@
 package com.stu.syllabuskt.syllabus
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import com.stu.syllabuskt.syllabus.ext.SetWeekAdapter
 import com.stu.syllabuskt.syllabus.ext.SetWeekFragment
 import com.stu.syllabuskt.utils.ToastUtil
 import com.stu.syllabuskt.widget.CtlScrollViewPager
+import kotlinx.android.synthetic.main.tip_dialog.*
 
 class SyllabusContainerFragment : BaseFragment() {
 
@@ -60,6 +63,7 @@ class SyllabusContainerFragment : BaseFragment() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.setWeek -> setCurWeek()
+//                R.id.setBg -> startSetWallpaper()
                 R.id.addLesson -> startAddLesson()
                 R.id.deleteLesson -> startDeleteLesson()
             }
