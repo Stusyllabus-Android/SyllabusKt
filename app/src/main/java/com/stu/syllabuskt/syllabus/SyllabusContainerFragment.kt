@@ -16,6 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
+import com.darrenyuen.pictureselector.ImageEngine
+import com.darrenyuen.pictureselector.SelectorHelper
 import com.google.android.material.navigation.NavigationView
 import com.stu.syllabuskt.R
 import com.stu.syllabuskt.StuContext
@@ -63,7 +65,16 @@ class SyllabusContainerFragment : BaseFragment() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.setWeek -> setCurWeek()
-//                R.id.setBg -> startSetWallpaper()
+                R.id.setBg -> {
+                    SelectorHelper.initEngine(object : ImageEngine {
+                        override fun loadImage(imageView: ImageView, uri: Uri) {
+
+                        }
+                    })
+                    SelectorHelper.Builder().apply {
+                        chooseSize = 1
+                    }.build().forResult(this, CHOOSE_PIC_CODE)
+                }
                 R.id.addLesson -> startAddLesson()
                 R.id.deleteLesson -> startDeleteLesson()
             }
@@ -125,6 +136,7 @@ class SyllabusContainerFragment : BaseFragment() {
         fun newInstance() = SyllabusContainerFragment()
 
         const val ADD_LESSON_CODE = 1
+        const val CHOOSE_PIC_CODE = 2
         const val SetWeekKey = "SetWeekKey"
         const val CurrentSemesterKey = "CurrentSemester"
     }
